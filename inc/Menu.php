@@ -48,8 +48,45 @@
 
   add_action('init', function (){
     remove_post_type_support( 'page', 'editor' );
+    remove_post_type_support( 'sections', 'editor' );
+    remove_post_type_support( 'actions', 'editor' );
   });
 
   /* Register custom post types */
+
+  function register_custom_post_type(string $type, string $singular, string $plural, string $slug): void {
+    $labels = array(
+      'name' => $plural,
+      'singular_name' => $singular,
+      'menu_name' => $plural,
+      'all_items' => 'Toutes les ' . strtolower($plural),
+      'view_item' => 'Voir les ' . strtolower($plural),
+      'add_new' => 'Ajouter',
+      'add_new_item' => 'Ajouter',
+      'edit_item' => 'Modifier la ' . strtolower($singular),
+      'search_items' => 'Rechercher une ' . strtolower($singular),
+      'not_found' => 'Non trouvée',
+      'not_found_in_trash' => 'Non trouvée dans la corbeille',
+    );
+
+    $args = array(
+      'label' => $singular,
+      'description' => 'Ajout d\'un(e) ' . strtolower($singular),
+      'labels' => $labels,
+      'supports' => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'custom-fields' ),
+      'show_in_rest' => true,
+      'public' => true,
+      'hierarchical' => false,
+      'has_archive' => true,
+      'rewrite' => array( 'slug' => $slug ),
+    );
+
+    register_post_type($type, $args);
+  }
+
+  add_action( 'init', function() {
+    register_custom_post_type('sections', 'Section', 'Sections', 'sections');
+    register_custom_post_type('actions', 'Action', 'Actions', 'actions');
+  }, 0 );
 
   /* Register custom post types */

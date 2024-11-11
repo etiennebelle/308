@@ -1,5 +1,11 @@
 <?php
+  use Layout\Layout;
+  use Cpt\Sections;
+
   get_header();
+
+  $rows_count = Layout::get_adjusted_rows_count();
+  $sections = Sections::get_sections_query();
 ?>
 
 <main id="main">

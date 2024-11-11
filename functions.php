@@ -8,3 +8,4 @@
   function vite_url($path): string {
     return Vite\Vite::get_instance()->asset_url($path);
   }
+
