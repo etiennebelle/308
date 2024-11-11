@@ -1,0 +1,21 @@
+#main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-black);
+}
+
+h1{
+  background: radial-gradient(circle 300px at 30% -180%, var(--color-gray) 0%, #ffffff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-wrap: balance;
+  cursor: default;
+  text-shadow: 0 0 10px rgba(255, 255, 255, .1), 0 0 20px rgba(130, 168, 236, .2);
+}

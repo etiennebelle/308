@@ -1,0 +1,69 @@
+@use 'mixins' as *;
+
+@font-face {
+  font-family: 'NeueMontreal-Regular';
+  src: url('/fonts/NeueMontreal-Regular.otf') format('opentype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+.headline {
+  font-family: 'NeueMontreal-Regular', 'sans-serif';
+  color: var(--color-black);
+  line-height: 1;
+
+  &-xl{
+    font-size: rem(80px);
+
+    @include device(laptop-and-up){
+      font-size: vw(80px);
+    }
+  }
+
+  &-lt{
+    color: var(--color-light);
+  }
+
+   &-up{
+    text-transform: uppercase;
+  }
+
+  &-ul{
+    text-decoration: underline;
+  }
+}
+
+.body{
+  font-family: 'NeueMontreal-Regular', 'sans-serif';
+  color: var(--color-black);
+  line-height: 1;
+
+  &-xl{
+    font-size: rem(20px);
+
+    @include device(laptop-and-up){
+      font-size: vw(20px);
+    }
+  }
+
+  &-md{
+    font-size: rem(14px);
+
+    @include device(pocket){
+      font-size: vw(14px);
+    }
+  }
+
+  &-lt{
+    color: var(--color-light);
+  }
+
+   &-up{
+    text-transform: uppercase;
+  }
+
+  &-ul{
+    text-decoration: underline;
+  }
+}

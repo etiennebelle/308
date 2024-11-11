@@ -1,0 +1,21 @@
+@use 'mixins' as *;
+
+/* Mobile */
+.only\:sm{
+  @include only(phone);
+}
+
+/* Pocket: Tablet and mobile */
+.only\:md{
+  @include only(pocket);
+}
+
+/* Tablet and up */
+.only\:lg{
+  @include only(tablet-and-up)
+}
+
+/* Laptop and up */
+.only\:xl{
+  @include only(desktop-and-up);
+}

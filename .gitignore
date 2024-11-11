@@ -1,0 +1,5 @@
+node_modules
+assets/static/fonts/*
+!assets/static/fonts/.gitkeep
+assets/static/img/*
+!assets/static/img/.gitkeep
