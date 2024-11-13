@@ -2,42 +2,82 @@
 
 @font-face {
   font-family: 'NeueMontreal-Regular';
-  src: url('/fonts/NeueMontreal-Regular.otf') format('opentype');
+  src: url('/fonts/NeueMontreal-Regular.otf') format('woff2');
   font-weight: 700;
   font-display: swap;
   font-style: normal;
 }
 
-.headline {
-  font-family: 'NeueMontreal-Regular', 'sans-serif';
+@font-face {
+  font-family: 'NeueMontreal-Medium';
+  src: url('/fonts/NeueMontreal-Medium.otf') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mondwest-Regular';
+  src: url('/fonts/Mondwest-Regular.otf') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mondwest-Bold';
+  src: url('/fonts/Mondwest-Bold.otf') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+.headline{
+  font-family: 'NeueMontreal-Medium', 'sans-serif';
   color: var(--color-black);
+  letter-spacing: rem(1px);
   line-height: 1;
-
-  &-xl{
-    font-size: rem(80px);
-
-    @include device(laptop-and-up){
-      font-size: vw(80px);
-    }
-  }
+  display: inline-flex;
+  transform: translateY(rem(2px));
 
   &-lt{
     color: var(--color-light);
   }
 
-   &-up{
+  &-up{
     text-transform: uppercase;
   }
 
   &-ul{
     text-decoration: underline;
   }
+
+  &-xl{
+    font-size: rem(20px);
+
+    @include device(laptop-and-up){
+      font-size: vw(20px);
+    }
+  }
 }
 
 .body{
-  font-family: 'NeueMontreal-Regular', 'sans-serif';
+  font-family: 'NeueMontreal-Medium', 'sans-serif';
   color: var(--color-black);
+  letter-spacing: rem(.5px);
   line-height: 1;
+
+  &-lt{
+    color: var(--color-light);
+  }
+
+  &-up{
+    text-transform: uppercase;
+  }
+
+  &-ul{
+    text-decoration: underline;
+  }
 
   &-xl{
     font-size: rem(20px);
@@ -53,17 +93,5 @@
     @include device(pocket){
       font-size: vw(14px);
     }
-  }
-
-  &-lt{
-    color: var(--color-light);
-  }
-
-   &-up{
-    text-transform: uppercase;
-  }
-
-  &-ul{
-    text-decoration: underline;
   }
 }

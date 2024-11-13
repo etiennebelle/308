@@ -1,0 +1,118 @@
+@use '../utils/mixins' as *;
+
+#main{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-light);
+
+  &.main{
+    @include calc-row-height();
+  }
+
+}
+
+.section{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition);
+  will-change: flex;
+
+  /* height: var(--row-$i) */
+  /* Calc condensed section height dynamically following nb of sections + actions */
+  @include dynamic-row-height();
+
+  &__heading{
+    cursor: pointer;
+    white-space: nowrap;
+
+    &__title{
+      flex: 1;
+    }
+
+    &__control{
+      height: 100%;
+
+      &:not(.only\:md){
+        display: flex;
+      }
+
+      opacity: 0;
+      will-change: opacity;
+
+      &.ctrl\:prev{
+        transform: translateX(rem(4px));
+        will-change: transform;
+        transition: transform var(--transition);
+
+        @include device(laptop-and-up){
+          transform: translateX(rem(10px));
+        }
+      }
+
+      &.ctrl\:next{
+        transform: translateX(rem(-4px));
+        will-change: transform;
+        transition: transform var(--transition);
+
+        @include device(laptop-and-up){
+          transform: translateX(rem(-10px));
+        }
+      }
+
+      svg{
+        width: rem(28px);
+
+        @include device(laptop-and-up){
+          transform: translateY(rem(2px));
+          width: vw(26px);
+        }
+      }
+    }
+  }
+
+  &__content{
+    overflow: hidden;
+  }
+
+  &--active{
+    flex: 1;
+  }
+
+  /* Content of active section */
+  &--active &{
+    &__heading__control{
+      opacity: 1;
+
+      &.ctrl\:prev,
+      &.ctrl\:next{
+        transform: translateX(0);
+      }
+    }
+  }
+
+  /* Content of inactive sections */
+  &:not(&--active) & {
+    &__heading:hover * {
+      font-family: "Mondwest-Bold", serif;
+      font-weight: 700;
+      font-size: rem(22px);
+
+      @include device(laptop-and-up){
+        font-size: vw(22px);
+      }
+    }
+  }
+
+  &:after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    bottom: rem(-2px);
+    height: rem(2px);
+    background: var(--color-black);
+  }
+}

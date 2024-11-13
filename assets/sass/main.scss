@@ -3,4 +3,7 @@
 @use 'utils/fonts';
 @use 'utils/base';
 
+@use 'layouts/layout';
+@use 'layouts/header';
+
 @use 'pages/home';

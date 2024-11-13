@@ -10,14 +10,12 @@
         'posts_per_page' => -1,
       ]);
     }
-
-    abstract protected static function format_post_data(\WP_Post $post): array;
   }
 
-  abstract class Sections extends Cpt {
+  class Sections extends Cpt {
     protected static string $postType = 'sections';
 
-    public static function get_sections_query(): \WP_Query {
+    public static function get_sections(): \WP_Query {
       return static::get_posts();
     }
   }

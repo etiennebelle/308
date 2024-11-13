@@ -1,0 +1,55 @@
+@use '../utils/mixins' as *;
+
+.row{
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: rem(10px);
+  padding: 0 rem(10px);
+
+  /* height: var(--row-$i) */
+  /* Calc row height dynamically following nb of sections + actions */
+  @include dynamic-row-height();
+
+  @include device(tablet-and-up){
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: dense;
+    align-items: center;
+    gap: 0;
+  }
+}
+
+.container{
+  position: relative;
+  display: flex;
+
+  /* height: 100% - var(--row-$i) */
+  /* Content wrapper has to be 100% of section height minus heading row */
+  @include calc-row-height(subtract, '%');
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: dense;
+  gap: 0;
+}
+
+.col {
+  &-1-start { grid-column-start: 1; }
+
+  &-2-start { grid-column-start: 2; }
+
+  &-3-start { grid-column-start: 3; }
+
+  &-4-start { grid-column-start: 4; }
+
+  &-1\/4 { grid-column: span 1; }
+
+  &-1\/2 { grid-column: span 2; }
+
+  &-3\/4 { grid-column: span 3; }
+
+  &-full { grid-column: span 4; }
+}

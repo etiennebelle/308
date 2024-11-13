@@ -1,5 +1,6 @@
 @use 'variables' as *;
 @use 'sass:math';
+@use 'sass:string';
 
 @function vw($px, $context: 1440px){
   @return calc(($px * 100vw) / $context);
@@ -15,6 +16,27 @@
   }
 
   @return calc($px / $context * 1rem);
+}
+
+@mixin dynamic-row-height($prop: height){
+  @for $i from 10 through 20{
+    &--#{$i}{
+      #{$prop}: var(--row-#{$i});
+    }
+  }
+}
+
+@mixin calc-row-height($op: subtract, $unit: vh){
+  @for $i from 10 through 20{
+    &--#{$i}{
+      @if $op == subtract{
+        height: calc(string.unquote('100#{$unit}') - var(--row-#{$i}));
+      }
+      @else if $op == divide{
+        height: calc(string.unquote('100#{$unit}') / var(--row-#{$i}));
+      }
+    }
+  }
 }
 
 @mixin device($alias) {
