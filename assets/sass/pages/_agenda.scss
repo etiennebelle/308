@@ -1,0 +1,13 @@
+@use '../utils/mixins' as *;
+
+.agenda {
+  flex-basis: 100%;
+  overflow: hidden;
+}
+.agenda__container {
+  display: flex;
+}
+.agenda__item {
+  flex: 0 0 100%;
+  min-width: 0;
+}

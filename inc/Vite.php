@@ -42,6 +42,11 @@
       return get_theme_file_uri('dist/' . $path);
     }
 
+    public function vite_url($path): string
+    {
+      return self::asset_url($path);
+    }
+
     public function add_module_type($tag, $handle, $src) {
       if (in_array($handle, ['vite', 'main'])) {
         return '<script type="module" src="' . esc_url($src) . '" defer></script>';

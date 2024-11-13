@@ -30,19 +30,19 @@
     */
     public function __construct(array $event, array $agendaColors)
     {
-    $this->title = ucwords($event['title'][self::LANG_FR]);
-    $this->keyword = $event['keywords'][self::LANG_FR][0];
-    $this->links = $event['links'];
-    $this->shortText = $event['description'][self::LANG_FR];
-    $this->richText = $this->formatRichText($event['longDescription'][self::LANG_FR], $this->links);
-    $this->imageUrl = $this->buildImageUrl($event['image']);
-    $this->imageCredits = $event['imageCredits'];
-    $this->startDate = $this->formatDate($event['firstTiming']['begin']);
-    $this->startTime = $this->formatTime($event['firstTiming']['begin']);
-    $this->endDate = $this->formatDate($event['lastTiming']['end']);
-    $this->durationDays = $this->calculateDuration($event['firstTiming']['begin'], $event['lastTiming']['end']);
-    $this->setDateDisplay($this->startDate, $this->startTime, $this->endDate, $this->durationDays, $this->keyword);
-    $this->setColors($agendaColors);
+      $this->title = ucwords($event['title'][self::LANG_FR]);
+      $this->keyword = $event['keywords'][self::LANG_FR][0];
+      $this->links = $event['links'];
+      $this->shortText = $event['description'][self::LANG_FR];
+      $this->richText = $this->formatRichText($event['longDescription'][self::LANG_FR], $this->links);
+      $this->imageUrl = $this->buildImageUrl($event['image']);
+      $this->imageCredits = $event['imageCredits'];
+      $this->startDate = $this->formatDate($event['firstTiming']['begin']);
+      $this->startTime = $this->formatTime($event['firstTiming']['begin']);
+      $this->endDate = $this->formatDate($event['lastTiming']['end']);
+      $this->durationDays = $this->calculateDuration($event['firstTiming']['begin'], $event['lastTiming']['end']);
+      $this->setDateDisplay($this->startDate, $this->startTime, $this->endDate, $this->durationDays, $this->keyword);
+      $this->setColors($agendaColors);
     }
 
     /**
@@ -58,21 +58,21 @@
     */
     private function formatRichText(string $richText, array $links): string
     {
-    $text = preg_replace('/\s*\(http[^)]+\)/', '', $richText);
-    $text = str_replace('*', '', $text);
-    if (!$links) {
-    $text = preg_replace("/[\[\]]/", "", $text);
-    } else {
-    $i = 0;
-    $text = preg_replace_callback('/\[([^]]+)]/', function($matches) use ($links, &$i) {
-    if (isset($links[$i])) {
-    $handle = $links[$i]['link'];
-    $i++;
-    return '<a class="' . self::LINK_CLASS . '" href="' . $handle . '" target="_blank">' . $matches[1] . '</a>';
-    }
-    return '';
-    }, $text);
-    }
+      $text = preg_replace('/\s*\(http[^)]+\)/', '', $richText);
+      $text = str_replace('*', '', $text);
+      if (!$links) {
+        $text = preg_replace("/[\[\]]/", "", $text);
+      } else {
+        $i = 0;
+        $text = preg_replace_callback('/\[([^]]+)]/', function($matches) use ($links, &$i) {
+        if (isset($links[$i])) {
+          $handle = $links[$i]['link'];
+          $i++;
+          return '<a class="' . self::LINK_CLASS . '" href="' . $handle . '" target="_blank">' . $matches[1] . '</a>';
+          }
+        return '';
+        }, $text);
+      }
     return $text;
     }
 
@@ -85,7 +85,7 @@
     */
     private function buildImageUrl(array $image): string
     {
-    return isset($image['base'], $image['filename']) ? $image['base'] . $image['filename'] : '';
+      return isset($image['base'], $image['filename']) ? $image['base'] . $image['filename'] : '';
     }
 
     /**
@@ -98,7 +98,7 @@
 
     private function formatDate(string $dateString): string
     {
-    return $this->formatDateTime($dateString, 'd-m-Y', '.');
+      return $this->formatDateTime($dateString, 'd-m-Y', '.');
     }
 
     /**
@@ -110,7 +110,7 @@
     */
     private function formatTime(string $dateString): string
     {
-    return $this->formatDateTime($dateString, 'H:i', 'h');
+      return $this->formatDateTime($dateString, 'H:i', 'h');
     }
 
     /**
@@ -124,8 +124,8 @@
     */
     private function formatDateTime(string $dateString, string $format, string $replace = ''): string
     {
-    $date = new \DateTime($dateString);
-    return str_replace([':', '-'], $replace, $date->format($format));
+      $date = new \DateTime($dateString);
+      return str_replace([':', '-'], $replace, $date->format($format));
     }
 
     /**
@@ -138,10 +138,10 @@
     */
     private function calculateDuration(string $startDateString, string $endDateString): int
     {
-    $startDate = new \DateTime($startDateString);
-    $endDate = new \DateTime($endDateString);
-    $interval = $startDate->diff($endDate);
-    return intval($interval->format('%a'));
+      $startDate = new \DateTime($startDateString);
+      $endDate = new \DateTime($endDateString);
+      $interval = $startDate->diff($endDate);
+      return intval($interval->format('%a'));
     }
 
     /**
@@ -156,13 +156,13 @@
 
     private function setDateDisplay(string $startDate, string $startTime, string $endDate, int $durationDays, string $keyword): void
     {
-    if (in_array(strtolower($keyword), ['radio', 'conferences'])) {
-    $this->dateDisplay = "{$startDate} → {$startTime}";
-    } elseif ($durationDays > 0) {
-    $this->dateDisplay = "{$startDate} → {$endDate}";
-    } else {
-    $this->dateDisplay = $startDate;
-    }
+      if (in_array(strtolower($keyword), ['radio', 'conferences'])) {
+        $this->dateDisplay = "{$startDate} → {$startTime}";
+      } elseif ($durationDays > 0) {
+        $this->dateDisplay = "{$startDate} → {$endDate}";
+      } else {
+        $this->dateDisplay = $startDate;
+      }
     }
 
     /**
@@ -173,8 +173,8 @@
     */
     private function setColors(array $agendaColors): void
     {
-    $color = $agendaColors[strtolower($this->keyword)] ?? null;
-    $this->contentColor = $color['color'] ?? '#000000';
-    $this->backgroundColor = $color['background'] ?? '#FFFFFF';
+      $color = $agendaColors[strtolower($this->keyword)] ?? null;
+      $this->contentColor = $color['color'] ?? '#000000';
+      $this->backgroundColor = $color['background'] ?? '#FFFFFF';
     }
   }

@@ -36,14 +36,14 @@
     &__control{
       height: 100%;
 
-      &:not(.only\:md){
+      &:not(.only--md){
         display: flex;
       }
 
       opacity: 0;
       will-change: opacity;
 
-      &.ctrl\:prev{
+      &.ctrl--prev{
         transform: translateX(rem(4px));
         will-change: transform;
         transition: transform var(--transition);
@@ -53,7 +53,7 @@
         }
       }
 
-      &.ctrl\:next{
+      &.ctrl--next{
         transform: translateX(rem(-4px));
         will-change: transform;
         transition: transform var(--transition);
@@ -87,8 +87,8 @@
     &__heading__control{
       opacity: 1;
 
-      &.ctrl\:prev,
-      &.ctrl\:next{
+      &.ctrl--prev,
+      &.ctrl--next{
         transform: translateX(0);
       }
     }

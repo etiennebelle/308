@@ -1,6 +1,6 @@
 <?php
-  use Layout\Layout;
-  use Cpt\Actions;
+  use Inc\Layout\Layout;
+  use Inc\Cpt\Actions;
 
   $actions = Actions::getActions();
   $rows_count = Layout::getAdjustedRowsCount();
@@ -13,7 +13,7 @@
         <?php foreach ($actions as $i => $action) : ?>
           <li
             class="actions__item row row--<?= esc_attr($rows_count); ?>"
-            data-id="<?= esc_attr($action["name"]); ?>"
+            data-key="<?= esc_attr($action["name"]); ?>"
             data-index="<?= esc_attr($i + 1); ?>"
             style="background: <?= esc_attr($action["background"]); ?>;"
           >

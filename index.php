@@ -13,18 +13,18 @@
     <?php while($sections->have_posts()): ?>
       <?php
         $sections->the_post();
-        $name = get_post()->post_name;
+        $key = get_post()->post_name;
         $title = get_the_title();
-        $is_active = ($name === $open_default ? 'section--active' : '');
+        $is_active = ($key === $open_default ? 'section--active' : '');
       ?>
       <section
-          id="<?= esc_attr($name) ?>"
+          id="<?= esc_attr($key) ?>"
           class="section section--<?= esc_attr($rows_count); ?> <?= esc_attr($is_active); ?>"
-          data-name="<?= esc_attr($name); ?>"
+          data-key="<?= esc_attr($key); ?>"
           data-index="<?= esc_attr($sections->current_post + 1); ?>"
       >
         <div
-            id="<?= esc_attr($name) ?>__heading"
+            id="<?= esc_attr($key) ?>__heading"
             class="section__heading row row--<?= esc_attr($rows_count); ?>"
         >
           <?php for($j = 0; $j < 2; $j++) : ?>
@@ -32,19 +32,19 @@
               <span class="headline headline-xl"><?= esc_html($title); ?></span>
             </h2>
           <?php endfor ?>
-          <div class="section__heading__control col-2-start ctrl:prev<?= $name != 'agenda' ? ' only:md' : ''; ?>">
+          <div class="section__heading__control col-2-start ctrl--prev<?= $key != 'agenda' ? ' only:md' : ''; ?>">
             <?php include 'components/svg/arrow-prev.svg'; ?>
           </div>
-          <div class="section__heading__control col-4-start ctrl:next<?= $name != 'agenda' ? ' only:md' : ''; ?>">
+          <div class="section__heading__control col-4-start ctrl--next<?= $key != 'agenda' ? ' only:md' : ''; ?>">
             <?php include 'components/svg/arrow-next.svg'; ?>
           </div>
         </div>
 
         <div
-            id="<?= esc_attr($name) ?>__content"
+            id="<?= esc_attr($key) ?>__content"
             class="section__content container container--<?= esc_attr($rows_count); ?>"
         >
-          <?php include locate_template('templates/' . $name . '.php'); ?>
+          <?php include locate_template('templates/' . $key . '.php'); ?>
         </div>
       </section>
     <?php endwhile ?>

@@ -48,7 +48,7 @@
           fill: var(--color-white);
         }
 
-        .icon\:open{
+        .icon--open{
           display: block;
           width: rem(26px);
 
@@ -57,7 +57,7 @@
           }
         }
 
-        .icon\:close{
+        .icon--close{
           display: none;
           width: rem(20px);
           transform: rotate(45deg) translate3d(rem(-1px), rem(3px), 0);
@@ -71,10 +71,10 @@
       &[aria-expanded="true"]{
         transform: rotate(45deg);
 
-        .icon\:open{
+        .icon--open{
           display: none;
         }
-        .icon\:close{
+        .icon--close{
           display: block;
         }
       }

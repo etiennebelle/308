@@ -41,10 +41,10 @@
           type="button"
       >
         <span class="header-btn__icon">
-            <span class="icon:open">
+            <span class="icon--open">
                 <?php include 'components/svg/open.svg' ?>
             </span>
-            <span class="icon:close">
+            <span class="icon--close">
                 <?php include 'components/svg/close.svg' ?>
             </span>
         </span>

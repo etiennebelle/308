@@ -5,15 +5,20 @@
   $agendaColors = Actions::getActionsColors();
   $agenda = new Agenda($_ENV['AGENDA_UID'], $_ENV['AGENDA_API_KEY'], $agendaColors);
   $events = $agenda->getEvents();
-
-  foreach ($events as $event) {
-    echo '<pre>';
-    var_dump($event);
-    echo '<br/>';
-    echo '</pre>';
-  }
 ?>
 
-<div class="carousel">
-
-</div>
+<?php if(!empty($events)): ?>
+  <div class="agenda">
+    <div class="agenda__container">
+      <?php foreach($events as $event): ?>
+        <div
+            class="agenda__item"
+            data-key="<?= $event->keyword ?>"
+        >
+          <?php echo $event->title ?>
+        </div>
+      <?php endforeach ?>
+    </div>
+  </div>
+<?php else: ?>
+<?php endif ?>
