@@ -14,7 +14,7 @@
 <?php wp_body_open(); ?>
 
 <?php
-  $rows_count = Layout\Layout::get_adjusted_rows_count();
+  $rows_count = Inc\Layout\Layout::getAdjustedRowsCount();
   $header_title = get_field('header_title');
   $header_title_min = get_field('header_title_minified');
 ?>

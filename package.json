@@ -16,6 +16,7 @@
     "sass": "^1.80.6"
   },
   "dependencies": {
+    "embla-carousel": "^8.3.1",
     "vite": "^5.4.10"
   }
 }

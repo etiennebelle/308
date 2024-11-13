@@ -2,8 +2,8 @@
   use Layout\Layout;
   use Cpt\Actions;
 
-  $actions = Actions::get_actions();
-  $rows_count = Layout::get_adjusted_rows_count();
+  $actions = Actions::getActions();
+  $rows_count = Layout::getAdjustedRowsCount();
 ?>
 
 <?php if (!empty($actions)) : ?>

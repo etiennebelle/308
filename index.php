@@ -1,11 +1,11 @@
 <?php
-  use Layout\Layout;
-  use Cpt\Sections;
+  use Inc\Layout\Layout;
+  use Inc\Cpt\Sections;
 
   get_header();
   $open_default = get_field('index_active_section');
-  $rows_count = Layout::get_adjusted_rows_count();
-  $sections = Sections::get_sections();
+  $rows_count = Layout::getAdjustedRowsCount();
+  $sections = Sections::getSections();
 ?>
 
 <main id="main" class="main main--<?= esc_attr($rows_count) ?>">
