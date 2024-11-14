@@ -31,7 +31,7 @@
     <div
         class="agenda__item"
         data-key="<?= $event->keyword ?>"
-        style="background: <?= $event->backgroundColor ?>";
+        style="background: <?= $event->backgroundColor ?>"
     >
       <div class="agenda__item__infos">
 
@@ -49,7 +49,7 @@
 
           <div class="agenda__item__location">
             <?php foreach($event->location as $location_part): ?>
-              <p class="body body-md"><?php echo $location_part; ?></p>
+              <p class="body body-md"><?= $location_part; ?></p>
             <?php endforeach ?>
           </div>
         </div>
@@ -65,7 +65,7 @@
       </div>
 
       <div class="agenda__item__media">
-        <img class="agenda__item__media__image" src="<?= esc_url($event->imageUrl) ?>" alt="<?= $event->tile ?>" loading="lazy" />
+        <img class="agenda__item__media__image" src="<?= esc_url($event->imageUrl) ?>" alt="<?= $event->title ?>" loading="lazy" />
       </div>
     </div>
     <?php

@@ -4,3 +4,5 @@ assets/static/fonts/*
 !assets/static/fonts/.gitkeep
 assets/static/img/*
 !assets/static/img/.gitkeep
+assets/sass/main.css
+assets/sass/main.css.map
