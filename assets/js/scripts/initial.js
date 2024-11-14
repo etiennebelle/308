@@ -9,6 +9,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function toggleActive(target){
     const sections = document.querySelectorAll('.section');
+    if(target.classList.contains('section--active')) return;
+
     sections.forEach((s) => s.classList.remove('section--active'));
     target.classList.add('section--active');
   }

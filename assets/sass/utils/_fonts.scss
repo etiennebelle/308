@@ -90,7 +90,7 @@
   &-md{
     font-size: rem(14px);
 
-    @include device(pocket){
+    @include device(laptop-and-up){
       font-size: vw(14px);
     }
   }

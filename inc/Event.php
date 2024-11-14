@@ -3,13 +3,14 @@
   class Event
   {
     private const LANG_FR = 'fr';
-    private const LINK_CLASS = 'body-md body-ul';
+    private const LINK_CLASS = 'body-ul';
 
     public string $title;
     public string $keyword;
     public array $links;
     public string $shortText;
     public string $richText;
+    public array $location;
     public string $imageUrl;
     public string $imageCredits;
 
@@ -35,6 +36,10 @@
       $this->links = $event['links'];
       $this->shortText = $event['description'][self::LANG_FR];
       $this->richText = $this->formatRichText($event['longDescription'][self::LANG_FR], $this->links);
+      $this->location = [
+        'name' => $event['location']['name'] ?? '',
+        'address' => $event['location']['address'] ?? '',
+      ];
       $this->imageUrl = $this->buildImageUrl($event['image']);
       $this->imageCredits = $event['imageCredits'];
       $this->startDate = $this->formatDate($event['firstTiming']['begin']);
@@ -58,22 +63,25 @@
     */
     private function formatRichText(string $richText, array $links): string
     {
-      $text = preg_replace('/\s*\(http[^)]+\)/', '', $richText);
-      $text = str_replace('*', '', $text);
-      if (!$links) {
-        $text = preg_replace("/[\[\]]/", "", $text);
-      } else {
+      $text = str_replace('*', '', $richText);
+
+      if (!empty($links)) {
+        $pattern = '/\[(.*?)]\((http[^)]+)\)/';
         $i = 0;
-        $text = preg_replace_callback('/\[([^]]+)]/', function($matches) use ($links, &$i) {
-        if (isset($links[$i])) {
-          $handle = $links[$i]['link'];
-          $i++;
-          return '<a class="' . self::LINK_CLASS . '" href="' . $handle . '" target="_blank">' . $matches[1] . '</a>';
+
+        $text = preg_replace_callback($pattern, function($matches) use ($links, &$i) {
+          if (isset($links[$i])) {
+            $url = $links[$i]['link'];
+            $i++;
+            return '<a class="' . self::LINK_CLASS . '" href="' . $url . '" target="_blank">' . $matches[1] . '</a>';
           }
-        return '';
+          return $matches[1];
         }, $text);
+      } else {
+        $text = preg_replace('/\[([^]]+)]/', '$1', $text);
       }
-    return $text;
+
+      return $text;
     }
 
     /**

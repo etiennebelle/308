@@ -1,8 +1,12 @@
 @use '../utils/mixins' as *;
 
 .header {
-  position: relative;
+  z-index: 100;
+  position: fixed;
   display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
   flex-direction: column;
   background: var(--color-black);
 
@@ -91,7 +95,19 @@
     transition: all var(--transition);
     visibility: hidden;
 
-    @include dynamic-row-height(top);
+    /*
+    * Set top placement equivalent to header height on mobile, so that the menu is positioned just below.
+    * top: var(--row-{$i}-mobile
+    */
+    @include dynamic-prop($prop: top);
+
+    @include device(tablet-and-up){
+      /*
+      * Set top placement equivalent to header height on desktop, so that the menu is positioned just below.
+      * top: var(--row-{$i}-mobile
+      */
+      @include dynamic-prop($device: desktop, $prop: top);
+    }
 
     &__nav__list{
       display: flex;

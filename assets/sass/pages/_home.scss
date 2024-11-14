@@ -1,17 +1,34 @@
 @use '../utils/mixins' as *;
 
-#main{
+.main{
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
+  height: auto;
   display: flex;
   flex-direction: column;
   background: var(--color-light);
 
-  &.main{
-    @include calc-row-height();
-  }
+  /*
+  * Set top placement equivalent to header height on mobile
+  * top: var(--row-{$i}-mobile
+  */
+  @include dynamic-prop($prop: top);
 
+  @include device(tablet-and-up){
+    overflow: hidden;
+    /*
+    * Set top placement equivalent to header height on desktop
+    * top: var(--row-{$i}-desktop
+    */
+    @include dynamic-prop($device: desktop, $prop: top);
+
+    /*
+    * Set height to 100vh - header
+    * height: calc(100vh - var(--row-{$i}-desktop));
+    */
+    @include dynamic-calc($device: desktop);
+  }
 }
 
 .section{
@@ -19,11 +36,21 @@
   display: flex;
   flex-direction: column;
   transition: all var(--transition);
-  will-change: flex;
+  will-change: height;
 
-  /* height: var(--row-$i) */
-  /* Calc condensed section height dynamically following nb of sections + actions */
-  @include dynamic-row-height();
+  /*
+  * Defines the height of a closed section on mobile
+  * height: var(--row-{$i}-mobile
+  */
+  @include dynamic-prop();
+
+  @include device(tablet-and-up){
+    /*
+    * Defines the height of a closed section on desktop
+    * height: var(--row-{$i}-mobile
+    */
+    @include dynamic-prop(desktop);
+  }
 
   &__heading{
     cursor: pointer;
@@ -36,7 +63,7 @@
     &__control{
       height: 100%;
 
-      &:not(.only--md){
+      &:not(.only\:md){
         display: flex;
       }
 
@@ -79,7 +106,24 @@
   }
 
   &--active{
-    flex: 1;
+    &.section{
+      /*
+        * Defines the height of an active section on mobile
+        * The active section must be 100vh minus the header size so that the other sections extend beyond the viewport.
+        * height: calc(100vh - var(--row-{$i}-desktop));
+        */
+      @include dynamic-calc();
+
+      @include device(tablet-and-up){
+        /*
+        * Defines the height of an active section on desktop
+        * To ensure that all site content takes up 100% of the viewport height we use $n
+        * $n = Inactive sections + Header
+        * height: calc(100vh - $n * var(--row-{$i}-desktop));
+        */
+        @include dynamic-calc($device: desktop, $multiplier: 6);
+      }
+    }
   }
 
   /* Content of active section */
@@ -111,7 +155,7 @@
     content: '';
     position: absolute;
     width: 100%;
-    bottom: rem(-2px);
+    bottom: 0;
     height: rem(2px);
     background: var(--color-black);
   }

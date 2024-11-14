@@ -4,17 +4,29 @@
   --color-light: #F9F9F9;
   --color-gray: #DDDDDD;
   --transition: 1s cubic-bezier(0.5, 0, 0.2, 1) 0s;
-  --row-10: calc(100vh / 10);
-  --row-11: calc(100vh / 11);
-  --row-12: calc(100vh / 12);
-  --row-13: calc(100vh / 13);
-  --row-14: calc(100vh / 14);
-  --row-15: calc(100vh / 15);
-  --row-16: calc(100vh / 16);
-  --row-17: calc(100vh / 17);
-  --row-18: calc(100vh / 18);
-  --row-19: calc(100vh / 19);
-  --row-20: calc(100vh / 20);
+  --row-10-desktop: calc(100vh / 10);
+  --row-11-desktop: calc(100vh / 11);
+  --row-12-desktop: calc(100vh / 12);
+  --row-13-desktop: calc(100vh / 13);
+  --row-14-desktop: calc(100vh / 14);
+  --row-15-desktop: calc(100vh / 15);
+  --row-16-desktop: calc(100vh / 16);
+  --row-17-desktop: calc(100vh / 17);
+  --row-18-desktop: calc(100vh / 18);
+  --row-19-desktop: calc(100vh / 19);
+  --row-20-desktop: calc(100vh / 20);
+
+  --row-10-mobile: calc(100vh / 5);
+  --row-11-mobile: calc(100vh / 6);
+  --row-12-mobile: calc(100vh / 7);
+  --row-13-mobile: calc(100vh / 8);
+  --row-14-mobile: calc(100vh / 9);
+  --row-15-mobile: calc(100vh / 10);
+  --row-16-mobile: calc(100vh / 11);
+  --row-17-mobile: calc(100vh / 12);
+  --row-18-mobile: calc(100vh / 13);
+  --row-19-mobile: calc(100vh / 14);
+  --row-20-mobile: calc(100vh / 15);
 }
 
 $mobile-max: 640px;

@@ -1,13 +1,54 @@
 @use '../utils/mixins' as *;
+@use '../layouts/layout';
 
 .agenda {
-  flex-basis: 100%;
+  flex: 1;
   overflow: hidden;
-}
-.agenda__container {
-  display: flex;
-}
-.agenda__item {
-  flex: 0 0 100%;
-  min-width: 0;
+
+  &__container {
+    display: flex;
+    height: 100%;
+  }
+
+  &__item {
+    flex: 0 0 100%;
+    position: relative;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+
+    @include device(tablet-and-up){
+      grid-template-rows: 1fr;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &[data-key="cycles"]{
+      *{
+        color: var(--color-light);
+      }
+    }
+
+    &__infos{
+      padding: rem(10px);
+    }
+    
+    &__details{
+      @include device(mobile){
+        display: none;
+      }
+    }
+
+    &__media{
+      position: relative;
+
+      &__image{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+  }
 }

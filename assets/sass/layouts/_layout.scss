@@ -7,9 +7,11 @@
   gap: rem(10px);
   padding: 0 rem(10px);
 
-  /* height: var(--row-$i) */
-  /* Calc row height dynamically following nb of sections + actions */
-  @include dynamic-row-height();
+  /*
+  * Dynamically assigns a height value on mobile based on the number of sections/actions
+  * height: var(--row-{$i}-mobile);
+  */
+  @include dynamic-prop();
 
   @include device(tablet-and-up){
     display: grid;
@@ -17,6 +19,12 @@
     grid-auto-flow: dense;
     align-items: center;
     gap: 0;
+
+    /*
+    * Dynamically assigns a height value on desktop based on the number of sections/actions
+    * height: var(--row-{$i}-mobile);
+    */
+    @include dynamic-prop($device: desktop);
   }
 }
 
@@ -24,9 +32,19 @@
   position: relative;
   display: flex;
 
-  /* height: 100% - var(--row-$i) */
-  /* Content wrapper has to be 100% of section height minus heading row */
-  @include calc-row-height(subtract, '%');
+  /*
+  * Calculates content height on mobile by taking 100% of section size minus section heading size (row)
+  * height: calc(100% - var(--row-${i}-mobile));
+  */
+  @include dynamic-calc($op: subtract, $unit: '%');
+
+  @include device(tablet-and-up){
+    /*
+  * Calculates content height on desktop by taking 100% of section size minus section heading size (row)
+  * height: calc(100% - var(--row-${i}-desktop));
+  */
+    @include dynamic-calc($device: desktop, $op: subtract, $unit: '%');
+  }
 }
 
 .grid{

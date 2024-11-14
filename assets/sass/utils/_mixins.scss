@@ -18,23 +18,32 @@
   @return calc($px / $context * 1rem);
 }
 
-@mixin dynamic-row-height($prop: height){
-  @for $i from 10 through 20{
-    &--#{$i}{
-      #{$prop}: var(--row-#{$i});
+@function calc-responsive-size($device, $i, $op, $unit, $multiplier){
+  $var: if($device == mobile, var(--row-#{$i}-mobile), var(--row-#{$i}-desktop));
+  $base: if($multiplier == 1, $var, calc($multiplier * $var));
+
+  @if $op == subtract{
+    @return calc(string.unquote('100#{$unit}') - $base);
+  } @else if $op == divide{
+    @return calc(string.unquote('100#{$unit}') / $base);
+  } @else {
+    @return $var;
+  }
+}
+
+@mixin dynamic-prop($device: mobile, $prop: height){
+  @for $i from 10 through 20 {
+    $var: if($device == mobile, var(--row-#{$i}-mobile), var(--row-#{$i}-desktop));
+    &--#{$i} {
+      #{$prop}: $var;
     }
   }
 }
 
-@mixin calc-row-height($op: subtract, $unit: vh){
-  @for $i from 10 through 20{
-    &--#{$i}{
-      @if $op == subtract{
-        height: calc(string.unquote('100#{$unit}') - var(--row-#{$i}));
-      }
-      @else if $op == divide{
-        height: calc(string.unquote('100#{$unit}') / var(--row-#{$i}));
-      }
+@mixin dynamic-calc($device: mobile, $op: subtract, $unit: vh, $multiplier: 1){
+  @for $i from 10 through 20 {
+    &--#{$i} {
+      height: calc-responsive-size($device, $i, $op, $unit, $multiplier);
     }
   }
 }

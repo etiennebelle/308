@@ -40,8 +40,8 @@
         return null;
       }
 
-      $eventsData = json_decode(wp_remote_retrieve_body($res), true);
-      return array_map(fn($event) => new Event($event, $this->agendaColors), $eventsData['events']);
+      $events = json_decode(wp_remote_retrieve_body($res), true);
+      return array_map(fn($event) => new Event($event, $this->agendaColors), $events['events']);
     }
   }
 
