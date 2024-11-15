@@ -32,12 +32,21 @@
   font-style: normal;
 }
 
+$font-xl-desktop: 20px;
+$font-xl-mobile: 22px;
+
+$font-md-desktop: 12px;
+$font-md-mobile: 14px;
+
+$font-sm-desktop: 9px;
+$font-sm-mobile: 11px;
+
 .headline{
+  display: inline-flex;
   font-family: 'NeueMontreal-Medium', 'sans-serif';
   color: var(--color-black);
-  letter-spacing: rem(1px);
+  letter-spacing: rem(0.75px);
   line-height: 1;
-  display: inline-flex;
   transform: translateY(rem(2px));
 
   &-lt{
@@ -53,10 +62,10 @@
   }
 
   &-xl{
-    font-size: rem(20px);
+    font-size: rem($font-xl-mobile);
 
     @include device(laptop-and-up){
-      font-size: vw(20px);
+      font-size: vw($font-xl-desktop);
     }
   }
 }
@@ -64,8 +73,8 @@
 .body{
   font-family: 'NeueMontreal-Medium', 'sans-serif';
   color: var(--color-black);
-  letter-spacing: rem(.5px);
-  line-height: 1;
+  letter-spacing: rem(0.75px);
+  line-height: 1.1;
 
   &-lt{
     color: var(--color-light);
@@ -80,18 +89,18 @@
   }
 
   &-xl{
-    font-size: rem(20px);
+    font-size: rem($font-xl-mobile);
 
     @include device(laptop-and-up){
-      font-size: vw(20px);
+      font-size: vw($font-xl-desktop);
     }
   }
 
   &-md{
-    font-size: rem(14px);
+    font-size: rem($font-md-mobile);
 
     @include device(laptop-and-up){
-      font-size: vw(14px);
+      font-size: vw($font-md-desktop);
     }
   }
 }

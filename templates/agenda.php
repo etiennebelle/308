@@ -34,32 +34,42 @@
         style="background: <?= $event->backgroundColor ?>"
     >
       <div class="agenda__item__infos">
+        <div class="agenda__item__container">
+          <button
+              class="mobile-expand"
+              aria-expanded="false"
+              aria-controls="agenda__item__details"
+              type="button"
+          >
+            <span class="body body-xl">+</span>
+          </button>
 
-        <div class="agenda__item__header">
-          <div class="agenda__item__key">
-            <span class="body body-xl body-ul body-up only:lg"><?= ucfirst(rtrim($event->keyword, "s")); ?></span>
-            <span class="body body-md body-ul body-up only:sm"><?= ucfirst(rtrim($event->keyword, "s")); ?></span>
+          <div class="agenda__item__header">
+            <div class="agenda__item__key">
+              <span class="body body-xl body-ul body-up only:lg"><?= ucfirst(rtrim($event->keyword, "s")); ?></span>
+              <span class="body body-md body-ul body-up only:sm"><?= ucfirst(rtrim($event->keyword, "s")); ?></span>
+            </div>
+
+            <div class="agenda__item__date">
+              <span class="body body-xl"><?= $event->dateDisplay; ?></span>
+            </div>
+
+            <h4 class="agenda__item__title"><span class="body body-xl"><?= $event->title; ?></span></h4>
+
+            <div class="agenda__item__location">
+              <?php foreach($event->location as $location_part): ?>
+                <p class="body body-md"><?= $location_part; ?></p>
+              <?php endforeach ?>
+            </div>
           </div>
 
-          <div class="agenda__item__date">
-            <span class="body body-xl"><?= $event->dateDisplay; ?></span>
-          </div>
-
-          <h4 class="agenda__item__title"><span class="body body-xl"><?= $event->title; ?></span></h4>
-
-          <div class="agenda__item__location">
-            <?php foreach($event->location as $location_part): ?>
-              <p class="body body-md"><?= $location_part; ?></p>
-            <?php endforeach ?>
-          </div>
-        </div>
-
-        <div class="agenda__item__details">
-          <div class="agenda__item__catchphrase">
-            <p class="body body-md"><?= nl2br($event->shortText); ?></p>
-          </div>
-          <div class="agenda__item__richtext">
-            <p class="body body-md"><?= nl2br($event->richText); ?></p>
+          <div class="agenda__item__details">
+            <div class="agenda__item__catchphrase">
+              <p class="body body-md"><?= nl2br($event->shortText); ?></p>
+            </div>
+            <div class="agenda__item__richtext">
+              <p class="body body-md"><?= nl2br($event->richText); ?></p>
+            </div>
           </div>
         </div>
       </div>

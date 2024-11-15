@@ -13,12 +13,11 @@
   &__item {
     flex: 0 0 100%;
     position: relative;
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column-reverse;
 
     @include device(tablet-and-up){
-      grid-template-rows: 1fr;
-      grid-template-columns: repeat(2, 1fr);
+      flex-direction: row;
     }
 
     &[data-key="cycles"]{
@@ -28,9 +27,30 @@
     }
 
     &__infos{
-      padding: rem(10px);
+      flex-basis: 50%;
+      position: relative;
+      will-change: flex-basis;
+      transition: all var(--transition);
+
+      .mobile-expand{
+        z-index: 1;
+        position: absolute;
+        top: rem(-4px);
+        right: rem(-1px);
+      }
+
+      &--expanded{
+        flex: 0 0 100%;
+      }
     }
-    
+
+    &__container{
+      margin: rem(10px);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
     &__details{
       @include device(mobile){
         display: none;
@@ -38,6 +58,7 @@
     }
 
     &__media{
+      flex-basis: 50%;
       position: relative;
 
       &__image{
