@@ -52,7 +52,7 @@
       $this->durationDays = $this->calculateDuration($event['firstTiming']['begin'], $event['lastTiming']['end']);
       $this->setDateDisplay($this->startDate, $this->startTime, $this->endDate, $this->durationDays, $this->keyword);
       $this->setColors($agendaColors);
-      $this->setRelatedEventsFromACF($this->id);
+      $this->setRelatedEventsFromACF();
     }
 
     /**
@@ -65,18 +65,22 @@
      * @return void
      *
      */
-    private function setRelatedEventsFromACF(int $id): void {
+    private function setRelatedEventsFromACF(): void {
+      $relatedEvents = [];
+
       if (have_rows('agenda_cycles')) {
         while (have_rows('agenda_cycles')) {
           the_row();
           $acf_id = (int) get_sub_field('cycle_id');
           $related = get_sub_field('cycle_events');
 
-          if (!empty($related) && $acf_id == $id) {
-            $this->relatedEvents = array_merge($this->relatedEvents, $related);
+          if (!empty($related) && $acf_id === $this->id) {
+            $relatedEvents = array_merge($relatedEvents, $related);
           }
         }
       }
+
+      $this->relatedEvents = $relatedEvents;
     }
 
     /**
