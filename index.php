@@ -1,13 +1,17 @@
 <?php
   use Inc\Layout\Layout;
   use Inc\Cpt\Sections;
+  use Inc\Cpt\Actions;
 
   get_header();
-  $open_default = get_field('index_active_section');
+
   $rows_count = Layout::getAdjustedRowsCount();
+  global $colors;
+  $colors = Actions::getActionsColors();
+
+  $open_default = get_field('index_active_section');
   $sections = Sections::getSections();
 ?>
-
 <main id="main" class="main main--<?= esc_attr($rows_count) ?>">
   <?php if($sections->have_posts()): ?>
     <?php while($sections->have_posts()): ?>

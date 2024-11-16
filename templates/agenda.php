@@ -1,9 +1,8 @@
 <?php
   use Inc\Agenda\Agenda;
-  use Inc\Cpt\Actions;
 
-  $agendaColors = Actions::getActionsColors();
-  $agenda = new Agenda($_ENV['AGENDA_UID'], $_ENV['AGENDA_API_KEY'], $agendaColors);
+  global $colors;
+  $agenda = new Agenda($_ENV['AGENDA_UID'], $_ENV['AGENDA_API_KEY'], $colors);
   $events = $agenda->getEvents();
 ?>
 
@@ -16,38 +15,35 @@
     </div>
   </div>
 <?php else: ?>
-  <div class="agenda--void">
-    <?php
-      $agenda_void_message = get_field('agenda_void_text');
-      $agenda_void_img = get_field('agenda_void_img');
-    ?>
-  </div>
+  <div class="agenda--void"></div>
 <?php endif ?>
 
 <?php
   function render_event($event): void
   {
+    $singularKeyword = rtrim($event->keyword, "s");
     ?>
     <div
         class="agenda__item"
-        data-key="<?= $event->keyword ?>"
+        data-id="<?= esc_attr($event->id); ?>"
+        data-key="<?= esc_attr($singularKeyword); ?>"
         style="background: <?= $event->backgroundColor ?>"
     >
       <div class="agenda__item__infos">
+        <button
+            class="mobile-expand"
+            aria-expanded="false"
+            aria-controls="agenda__item__details"
+            type="button"
+        >
+          <span class="body body-xl">+</span>
+        </button>
         <div class="agenda__item__container">
-          <button
-              class="mobile-expand"
-              aria-expanded="false"
-              aria-controls="agenda__item__details"
-              type="button"
-          >
-            <span class="body body-xl">+</span>
-          </button>
 
           <div class="agenda__item__header">
             <div class="agenda__item__key">
-              <span class="body body-xl body-ul body-up only:lg"><?= ucfirst(rtrim($event->keyword, "s")); ?></span>
-              <span class="body body-md body-ul body-up only:sm"><?= ucfirst(rtrim($event->keyword, "s")); ?></span>
+              <span class="body body-xl body-ul body-up only:lg"><?= ucfirst($singularKeyword); ?></span>
+              <span class="body body-md body-ul body-up only:sm"><?= ucfirst($singularKeyword); ?></span>
             </div>
 
             <div class="agenda__item__date">
@@ -61,9 +57,26 @@
                 <p class="body body-md"><?= $location_part; ?></p>
               <?php endforeach ?>
             </div>
+
+            <?php if($singularKeyword === 'cycle'): ?>
+            <div class="agenda__item__related">
+              <?php if(!empty($event->getRelatedEvents())): ?>
+                <ul>
+                  <?php foreach($event->getRelatedEvents() as $related_event): ?>
+                    <li
+                        class="cycle__related__event"
+                        data-id="<?= esc_attr($related_event['cycle_event_id']) ?? ''; ?>"
+                    >
+                      <span class="body body-md"><?= $related_event['cycle_event_name'] ?? '' ?></span>
+                    </li>
+                  <?php endforeach ?>
+                </ul>
+              <?php endif ?>
+            </div>
+            <?php endif ?>
           </div>
 
-          <div class="agenda__item__details">
+          <div class="agenda__item__details" aria-hidden="true">
             <div class="agenda__item__catchphrase">
               <p class="body body-md"><?= nl2br($event->shortText); ?></p>
             </div>

@@ -5,10 +5,11 @@
     protected static string $postType = '';
 
     public static function getPosts(): \WP_Query {
-      return new \WP_Query([
+      return new \WP_Query(array(
         'post_type' => static::$postType,
         'posts_per_page' => -1,
-      ]);
+        'post_status' => 'publish',
+      ));
     }
   }
 
@@ -42,8 +43,7 @@
       if ($query->have_posts()) {
         while ($query->have_posts()) {
           $query->the_post();
-          global $post;
-          $actions[] = static::formatPost($post);
+          $actions[] = static::formatPost($query->post);
         }
         wp_reset_postdata();
       }

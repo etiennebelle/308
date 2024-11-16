@@ -16,24 +16,39 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   /* Agenda Expand on Mobile */
-  const expandButtons = document.querySelectorAll('.mobile-expand');
-  expandButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-      const item = e.target.closest('.agenda__item');
-      const wrapper = item.querySelector('.agenda__item__infos');
-      toggleExpanded(button, wrapper);
-    })
-  })
+  document.querySelectorAll('.mobile-expand').forEach(initExpandButton);
 
-  function toggleExpanded(button, wrapper){
-    if(!wrapper || !button) return;
-    const className = 'agenda__item__infos--expanded';
-    if(wrapper.classList.contains(className)){
-      wrapper.classList.remove(className);
-      button.setAttribute('aria-expanded', true);
-    } else {
-      wrapper.classList.add(className);
-      button.setAttribute('aria-expanded', false);
-    }
+  function initExpandButton(button) {
+    button.addEventListener('click', () => {
+      const item = button.closest('.agenda__item');
+      if (!item) return;
+
+      const wrapper = item.querySelector('.agenda__item__infos');
+      const details = wrapper?.querySelector('.agenda__item__details');
+
+      toggleExpansion(item, wrapper, details, button);
+    });
+  }
+
+  /**
+   * @param {HTMLElement} item
+   * @param {HTMLElement} wrapper
+   * @param {HTMLElement} details
+   * @param {HTMLElement} button
+   */
+  function toggleExpansion(item, wrapper, details, button) {
+    if (!wrapper || !button) return;
+
+    const expandedClass = 'agenda__item__infos--expanded';
+    const isExpanded = wrapper.classList.contains(expandedClass);
+
+    wrapper.classList.toggle(expandedClass, !isExpanded);
+    button.setAttribute('aria-expanded', !isExpanded);
+    details?.setAttribute('aria-hidden', isExpanded);
+
+    item.dispatchEvent(new CustomEvent('agendaItemToggled', {
+      detail: { isExpanded, item, wrapper, details },
+      bubbles: true
+    }));
   }
 })

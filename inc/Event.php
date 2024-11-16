@@ -5,6 +5,7 @@
     private const LANG_FR = 'fr';
     private const LINK_CLASS = 'body-ul';
 
+    public int $id;
     public string $title;
     public string $keyword;
     public array $links;
@@ -23,6 +24,8 @@
     public string $contentColor;
     public string $backgroundColor;
 
+    private array $relatedEvents = [];
+
     /**
     * Event constructor.
     *
@@ -31,6 +34,7 @@
     */
     public function __construct(array $event, array $agendaColors)
     {
+      $this->id = $event['uid'];
       $this->title = ucwords($event['title'][self::LANG_FR]);
       $this->keyword = $event['keywords'][self::LANG_FR][0];
       $this->links = $event['links'];
@@ -48,6 +52,41 @@
       $this->durationDays = $this->calculateDuration($event['firstTiming']['begin'], $event['lastTiming']['end']);
       $this->setDateDisplay($this->startDate, $this->startTime, $this->endDate, $this->durationDays, $this->keyword);
       $this->setColors($agendaColors);
+      $this->setRelatedEventsFromACF($this->id);
+    }
+
+    /**
+     * A bit of a hacky technique for retrieving events linked to a cycle,
+     * as OpenAgenda doesn't allow them to be grouped under a single event.
+     * We retrieve the ID returned by the api. On the WP side, add the IDs of the parent cycle
+     * and those of the child events to the repeater. Default relatedEvents is an empty array
+     *
+     * @param int $id
+     * @return void
+     *
+     */
+    private function setRelatedEventsFromACF(int $id): void {
+      if (have_rows('agenda_cycles')) {
+        while (have_rows('agenda_cycles')) {
+          the_row();
+          $acf_id = (int) get_sub_field('cycle_id');
+          $related = get_sub_field('cycle_events');
+
+          if (!empty($related) && $acf_id == $id) {
+            $this->relatedEvents = array_merge($this->relatedEvents, $related);
+          }
+        }
+      }
+    }
+
+    /**
+     * Getter to retrieve related Events
+     *
+     * @return array
+     */
+    public function getRelatedEvents(): array
+    {
+      return $this->relatedEvents;
     }
 
     /**
