@@ -1,3 +1,10 @@
+<?php
+  use Inc\Layout\Layout;
+  $rows_count = Layout::getAdjustedRowsCount();
+  $header_title = get_field('header_title');
+  $header_title_min = get_field('header_title_minified');
+?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
@@ -8,16 +15,16 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <?php wp_head(); ?>
+  <style>
+    :root{
+        --sections: <?= Layout::getSectionsCount(); ?>;
+        --actions: <?= Layout::getActionsCount(); ?>;
+    }
+  </style>
 </head>
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-
-<?php
-  $rows_count = Inc\Layout\Layout::getAdjustedRowsCount();
-  $header_title = get_field('header_title');
-  $header_title_min = get_field('header_title_minified');
-?>
 
 <header class="header">
   <div class="header__wrapper row row--<?= esc_attr($rows_count) ?>">

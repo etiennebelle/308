@@ -4,6 +4,7 @@
   --color-light: #F9F9F9;
   --color-gray: #DDDDDD;
   --transition: 1s cubic-bezier(0.5, 0, 0.2, 1) 0s;
+  --layout-padding: 15px;
 
   --row-10-desktop: calc(100vh / 10);
   --row-11-desktop: calc(100vh / 11);
@@ -29,6 +30,15 @@
   --row-19-mobile: calc(100vh / 14);
   --row-20-mobile: calc(100vh / 15);
 }
+
+$layout-padding: 15px;
+
+$font-xl-desktop: 20px;
+$font-xl-mobile: 22px;
+$font-md-desktop: 12px;
+$font-md-mobile: 14px;
+$font-sm-desktop: 10px;
+$font-sm-mobile: 12px;
 
 $mobile-max: 640px;
 $tablet-min: 641px;

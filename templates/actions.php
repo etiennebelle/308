@@ -7,12 +7,12 @@
 ?>
 
 <?php if (!empty($actions)) : ?>
-  <div class="grid">
-    <div class="col-1/4">
+  <div class="grid grid--4">
+    <div class="col-span-1">
       <ul class="actions__nav">
         <?php foreach ($actions as $i => $action) : ?>
           <li
-            class="actions__item row row--<?= esc_attr($rows_count); ?>"
+            class="actions__nav__item row row--<?= esc_attr($rows_count); ?>"
             data-key="<?= esc_attr($action["name"]); ?>"
             data-index="<?= esc_attr($i + 1); ?>"
             style="background: <?= esc_attr($action["background"]); ?>;"
@@ -24,15 +24,19 @@
         <?php endforeach; ?>
       </ul>
     </div>
-    <div class="col-3/4">
-      <div class="actions__list">
-        <div class="actions__list__container">
+    <div class="col-span-3">
+      <div class="actions">
+        <div class="actions__container actions__container--<?= esc_attr($rows_count); ?>">
           <?php foreach ($actions as $i => $action) : ?>
             <div
-              class="actions__list__slide"
-              data-id="<?= esc_attr($action["name"]); ?>"
+              class="actions__slide"
+              data-key="<?= esc_attr($action["name"]); ?>"
               style="background: <?= esc_attr($action["background"]); ?>;"
             >
+              <div class="grid grid--3">
+                <div class="col-span-1">1</div>
+                <div class="col-span-2">2</div>
+              </div>
             </div>
           <?php endforeach; ?>
         </div>

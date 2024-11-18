@@ -4,6 +4,10 @@
   global $colors;
   $agenda = new Agenda($_ENV['AGENDA_UID'], $_ENV['AGENDA_API_KEY'], $colors);
   $events = $agenda->getEvents();
+
+  $void_message = get_field('agenda_void_text');
+  ['name' => $void_img_alt, 'value' => $void_img_url] = get_field_object("agenda_void_img");
+  $void_img_credits = get_field("agenda_void_img_credits");
 ?>
 
 <?php if(!empty($events)): ?>
@@ -15,7 +19,23 @@
     </div>
   </div>
 <?php else: ?>
-  <div class="agenda--void"></div>
+  <div class="agenda--void">
+    <div class="agenda__container">
+      <div class="agenda__slide">
+        <div class="agenda__slide__infos">
+          <div class="agenda__slide__container">
+            <p class="body body-md body-lt"><?= esc_html($void_message); ?></p>
+          </div>
+        </div>
+        <div class="agenda__slide__media">
+          <img class="agenda__slide__media__image" src="<?= esc_url($void_img_url); ?>" alt="<?= esc_attr($void_img_alt); ?>"/>
+          <div class="agenda__slide__media__credits">
+            <span class="body body-sm body-lt"><?= esc_html($void_img_credits); ?></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <?php endif ?>
 
 <?php
@@ -24,71 +44,57 @@
     $singularKeyword = rtrim($event->keyword, "s");
     ?>
     <div
-        class="agenda__item"
+        class="agenda__slide"
         data-id="<?= esc_attr($event->id); ?>"
         data-key="<?= esc_attr($singularKeyword); ?>"
-        style="background: <?= $event->backgroundColor ?>"
+        style="background: <?= esc_attr($event->backgroundColor); ?>"
     >
-      <div class="agenda__item__infos">
+      <div class="agenda__slide__infos">
         <button
             class="mobile-expand"
             aria-expanded="false"
-            aria-controls="agenda__item__details"
+            aria-controls="agenda__slide__details"
             type="button"
         >
           <span class="body body-xl">+</span>
         </button>
-        <div class="agenda__item__container">
+        <div class="agenda__slide__container">
 
-          <div class="agenda__item__header">
-            <div class="agenda__item__key">
+          <div class="agenda__slide__header">
+            <div class="agenda__slide__key">
               <span class="body body-xl body-ul body-up only:lg"><?= ucfirst($singularKeyword); ?></span>
               <span class="body body-md body-ul body-up only:sm"><?= ucfirst($singularKeyword); ?></span>
             </div>
 
-            <div class="agenda__item__date">
+            <div class="agenda__slide__date">
               <span class="body body-xl"><?= $event->dateDisplay; ?></span>
             </div>
 
-            <h4 class="agenda__item__title"><span class="body body-xl"><?= $event->title; ?></span></h4>
+            <h4 class="agenda__slide__title"><span class="body body-xl"><?= $event->title; ?></span></h4>
 
-            <div class="agenda__item__location">
-              <?php foreach($event->location as $location_part): ?>
-                <p class="body body-md"><?= $location_part; ?></p>
+            <div class="agenda__slide__location">
+              <?php foreach($event->location as $location_key): ?>
+                <p class="body body-md"><?= $location_key; ?></p>
               <?php endforeach ?>
             </div>
-
-            <?php if($singularKeyword === 'cycle'): ?>
-            <div class="agenda__item__related">
-              <?php if(!empty($event->getRelatedEvents())): ?>
-                <ul>
-                  <?php foreach($event->getRelatedEvents() as $related_event): ?>
-                    <li
-                        class="cycle__related__event"
-                        data-id="<?= esc_attr($related_event['cycle_event_id']) ?? ''; ?>"
-                    >
-                      <span class="body body-md"><?= $related_event['cycle_event_name'] ?? '' ?></span>
-                    </li>
-                  <?php endforeach ?>
-                </ul>
-              <?php endif ?>
-            </div>
-            <?php endif ?>
           </div>
 
-          <div class="agenda__item__details" aria-hidden="true">
-            <div class="agenda__item__catchphrase">
+          <div class="agenda__slide__details" aria-hidden="true">
+            <div class="agenda__slide__catchphrase">
               <p class="body body-md"><?= nl2br($event->shortText); ?></p>
             </div>
-            <div class="agenda__item__richtext">
+            <div class="agenda__slide__richtext">
               <p class="body body-md"><?= nl2br($event->richText); ?></p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="agenda__item__media">
-        <img class="agenda__item__media__image" src="<?= esc_url($event->imageUrl) ?>" alt="<?= $event->title ?>" loading="lazy" />
+      <div class="agenda__slide__media">
+        <img class="agenda__slide__media__image" src="<?= esc_url($event->imageUrl) ?>" alt="<?= $event->title ?>" loading="lazy" />
+        <div class="agenda__slide__media__credits" style="background: <?= esc_attr($event->backgroundColor); ?>">
+          <span class="body body-sm"><?= $event->imageCredits ?></span>
+        </div>
       </div>
     </div>
     <?php

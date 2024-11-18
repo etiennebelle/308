@@ -26,6 +26,8 @@
     @return calc(string.unquote('100#{$unit}') - $base);
   } @else if $op == divide{
     @return calc(string.unquote('100#{$unit}') / $base);
+  } @else if $op == multiply {
+    @return calc($base);
   } @else {
     @return $var;
   }

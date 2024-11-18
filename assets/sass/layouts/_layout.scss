@@ -1,3 +1,4 @@
+@use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 
 .row{
@@ -5,7 +6,7 @@
   display: flex;
   align-items: center;
   gap: rem(10px);
-  padding: 0 rem(10px);
+  padding: 0 rem($layout-padding);
 
   /*
   * Dynamically assigns a height value on mobile based on the number of sections/actions
@@ -49,9 +50,16 @@
 
 .grid{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   grid-auto-flow: dense;
   gap: 0;
+
+  &--3{
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &--4{
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .col {
@@ -63,11 +71,11 @@
 
   &-4-start { grid-column-start: 4; }
 
-  &-1\/4 { grid-column: span 1; }
+  &-span-1 { grid-column: span 1; }
 
-  &-1\/2 { grid-column: span 2; }
+  &-span-2 { grid-column: span 2; }
 
-  &-3\/4 { grid-column: span 3; }
+  &-span-3 { grid-column: span 3; }
 
-  &-full { grid-column: span 4; }
+  &-span-4 { grid-column: span 4; }
 }

@@ -1,3 +1,4 @@
+@use 'variables' as *;
 @use 'mixins' as *;
 
 @font-face {
@@ -31,15 +32,6 @@
   font-display: swap;
   font-style: normal;
 }
-
-$font-xl-desktop: 20px;
-$font-xl-mobile: 22px;
-
-$font-md-desktop: 12px;
-$font-md-mobile: 14px;
-
-$font-sm-desktop: 9px;
-$font-sm-mobile: 11px;
 
 .headline{
   display: inline-flex;
@@ -101,6 +93,14 @@ $font-sm-mobile: 11px;
 
     @include device(laptop-and-up){
       font-size: vw($font-md-desktop);
+    }
+  }
+
+  &-sm{
+    font-size: rem($font-sm-mobile);
+
+    @include device(laptop-and-up){
+      font-size: vw($font-sm-desktop);
     }
   }
 }
