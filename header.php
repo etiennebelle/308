@@ -1,5 +1,7 @@
 <?php
   use Inc\Layout\Layout;
+
+  global $rows_count;
   $rows_count = Layout::getAdjustedRowsCount();
   $header_title = get_field('header_title');
   $header_title_min = get_field('header_title_minified');
@@ -28,7 +30,7 @@
 
 <header class="header">
   <div class="header__wrapper row row--<?= esc_attr($rows_count) ?>">
-    <div class="header__col col-3/4">
+    <div class="header__col col-span-3">
       <div class="header__title only:xl">
         <h1 class="headline headline-xl headline-lt headline-up">
           <?= esc_html($header_title); ?>
@@ -40,7 +42,7 @@
         </h1>
       </div>
     </div>
-    <div class="header__col col-1/4">
+    <div class="header__col col-span-1">
       <button
           class="header-btn"
           aria-expanded="false"

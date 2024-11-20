@@ -1,19 +1,22 @@
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 
-.agenda {
-  flex: 1;
-  overflow: hidden;
+#agenda__content{
+  .primary__carousel{
+    &--void{
+      flex: 1;
 
-  &__container {
-    display: flex;
+      *{
+        background: var(--color-black);
+      }
+    }
+  }
+
+  .primary__container {
     height: 100%;
   }
 
-  &__slide {
-    flex: 0 0 100%;
-    position: relative;
-    display: flex;
+  .primary__slide {
     flex-direction: column-reverse;
 
     @include device(tablet-and-up){
@@ -21,9 +24,7 @@
     }
 
     &__infos{
-      flex-basis: 50%;
-      display: flex;
-      position: relative;
+      flex: 1;
       will-change: flex-basis;
       transition: all var(--transition);
       overflow: hidden;
@@ -59,7 +60,7 @@
       margin-right: rem(20px);
       display: flex;
       flex-direction: column;
-      gap: rem(20px);
+      gap: rem(5px);
       overflow-y: auto;
       justify-content: space-between;
 
@@ -133,33 +134,9 @@
     }
 
     &__media{
-      flex-basis: 50%;
-      position: relative;
-
-      &__image{
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        object-fit: cover;
-        object-position: center;
-      }
+      flex: 1;
 
       &__credits{
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 50%;
-        padding: rem(5px) 0;
-        display: flex;
-        align-items: end;
-        justify-content: end;
-
-        span{
-          margin-inline: rem($layout-padding);
-        }
-
         @include device(pocket){
           display: none;
         }
@@ -172,12 +149,5 @@
       }
     }
   }
-
-  &--void{
-    flex: 1;
-
-    *{
-      background: var(--color-black);
-    }
-  }
 }
+

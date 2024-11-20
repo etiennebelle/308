@@ -5,7 +5,7 @@
 
   get_header();
 
-  $rows_count = Layout::getAdjustedRowsCount();
+  global $rows_count;
   global $colors;
   $colors = Actions::getActionsColors();
 

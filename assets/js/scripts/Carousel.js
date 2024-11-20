@@ -54,7 +54,7 @@ export default class Carousel {
 export class AgendaCarousel extends Carousel {
   constructor(selector, options = {}, controllers = {}) {
     super(selector, options, controllers);
-    this.expandedClass = 'agenda__slide__infos--expanded';
+    this.expandedClass = 'primary__slide__infos--expanded';
   }
 
   init() {
@@ -68,11 +68,11 @@ export class AgendaCarousel extends Carousel {
 
   initExpandButton(button) {
     button.addEventListener('click', () => {
-      const item = button.closest('.agenda__slide');
+      const item = button.closest('.primary__slide');
       if (!item) return;
 
-      const wrapper = item.querySelector('.agenda__slide__infos');
-      const details = wrapper.querySelector('.agenda__slide__details');
+      const wrapper = item.querySelector('.primary__slide__infos');
+      const details = wrapper.querySelector('.primary__slide__details');
 
       this.toggleExpansion(item, wrapper, details, button);
     });

@@ -49,20 +49,25 @@
 }
 
 .grid{
+  width: 100%;
   display: grid;
   grid-auto-flow: dense;
   gap: 0;
 
-  &--3{
+  &-cols-3{
     grid-template-columns: repeat(3, 1fr);
   }
 
-  &--4{
+  &-cols-4{
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
 .col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
   &-1-start { grid-column-start: 1; }
 
   &-2-start { grid-column-start: 2; }

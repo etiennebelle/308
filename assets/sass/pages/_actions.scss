@@ -1,28 +1,74 @@
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 
-.actions{
-  flex: 1;
-  overflow: hidden;
+#actions__content {
+  .actions__nav{
+    &__list{
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
 
-  &__container{
-    display: flex;
-    flex-direction: column;
+    &__item{
+      cursor: pointer;
 
-    /*
-    * Because of the Y axis of the carousel, we need to force the active slide container height
-    * to be calculated according to the number of actions.
-    */
-    &.actions__container{
-      @include dynamic-calc($op: multiply, $multiplier: var(--actions));
-
-      @include device(tablet-and-up){
-        @include dynamic-calc($device: desktop, $op: multiply, $multiplier: var(--actions));
+      &[data-key="cycles"] {
+        * {
+          color: var(--color-light);
+        }
       }
+    }
+
+    @include device(mobile){
+      grid-column: span 4;
     }
   }
 
-  &__slide{
-    flex: 0 0 100%;
+  .actions__nav__item:hover{
+    background: red;
+  }
+
+  .primary__carousel {
+    @include device(mobile) {
+      display: none;
+    }
+  }
+
+  .primary__container {
+    flex-direction: column;
+  }
+
+  .primary__slide {
+    @include device(tablet){
+      flex-direction: column;
+    }
+
+    &__infos {
+      flex: 1;
+      overflow: scroll;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &__richtext {
+      padding: $layout-padding;
+    }
+
+    &__media {
+      flex: 2;
+
+      @include device(tablet){
+        display: none;
+      }
+    }
+
+    &[data-key="cycles"] {
+      * {
+        color: var(--color-light);
+      }
+    }
   }
 }

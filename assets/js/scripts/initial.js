@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   /* Agenda */
   const agendaCarousel = new AgendaCarousel(
-    '.agenda',
+    '#agenda__content .primary__carousel',
     { loop: true },
     {
       prev: '#agenda .ctrl--prev',
@@ -21,7 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
   agendaCarousel.init();
 
   const actionsCarousel = new Carousel(
-    '.actions',
+    '#actions__content .primary__carousel',
     { loop: true, axis: 'y' },
     {
       navItems: '.actions__nav__item'
