@@ -1,153 +1,179 @@
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 
-#agenda__content{
-  .primary__carousel{
-    &--void{
-      flex: 1;
+.agenda__carousel{
+  flex: 1;
+  overflow: hidden;
+}
 
-      *{
-        background: var(--color-black);
+.agenda__wrapper {
+  position: relative;
+  display: flex;
+  height: 100%;
+}
+
+.agenda__slide {
+  width: 100%;
+  position: relative;
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column-reverse;
+
+  @include device(tablet-and-up){
+    flex-direction: row;
+  }
+
+  &__infos{
+    display: flex;
+    position: relative;
+    flex: 1;
+    will-change: flex-basis;
+    transition: all var(--transition);
+    overflow: hidden;
+
+    &--expanded{
+      @include device(mobile){
+        flex: 0 0 100%;
+        overflow-y: auto;
+      }
+    }
+
+    .mobile-expand {
+      z-index: 1;
+      position: absolute;
+      top: rem(5px);
+      right: rem(8px);
+      will-change: rotate;
+      transition: transform var(--transition);
+
+      &[aria-expanded="true"] {
+        transform: rotate(45deg);
+      }
+
+      @include device(tablet-and-up){
+        display: none;
       }
     }
   }
 
-  .primary__container {
-    height: 100%;
+  &__container{
+    position: relative;
+    padding: rem($ui-spacing);
+    margin-right: rem(20px);
+    display: flex;
+    flex-direction: column;
+    gap: rem(5px);
+    overflow-y: auto;
+    justify-content: space-between;
+
+    &::-webkit-scrollbar{
+      display: none;
+    }
+
+    @include device(laptop-and-up){
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: rem(10px);
+    }
   }
 
-  .primary__slide {
-    flex-direction: column-reverse;
+  &__header{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: rem(10px);
+  }
 
-    @include device(tablet-and-up){
-      flex-direction: row;
+  &__details{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: rem(10px);
+    height: 0;
+    will-change: flex-grow;
+    transition: all var(--transition);
+    overflow: hidden;
+
+    &[aria-hidden="false"]{
+      flex-grow: 1;
+      overflow: initial;
     }
 
-    &__infos{
-      flex: 1;
-      will-change: flex-basis;
-      transition: all var(--transition);
-      overflow: hidden;
-
-      &--expanded{
-        @include device(mobile){
-          flex: 0 0 100%;
-          overflow-y: auto;
-        }
-      }
-
-      .mobile-expand {
-        z-index: 1;
-        position: absolute;
-        top: rem(5px);
-        right: rem(8px);
-        will-change: rotate;
-        transition: transform var(--transition);
-
-        &[aria-expanded="true"] {
-          transform: rotate(45deg);
-        }
-
-        @include device(tablet-and-up){
-          display: none;
-        }
-      }
+    &::-webkit-scrollbar{
+      display: none;
     }
 
-    &__container{
-      position: relative;
-      padding: rem($layout-padding);
+    @include device(tablet){
+      height: 100%;
+      overflow: initial;
+    }
+
+    @include device(laptop-and-up){
+      height: 100%;
+      overflow: auto;
       margin-right: rem(20px);
-      display: flex;
-      flex-direction: column;
-      gap: rem(5px);
-      overflow-y: auto;
-      justify-content: space-between;
-
-      &::-webkit-scrollbar{
-        display: none;
-      }
-
-      @include device(laptop-and-up){
-        margin: 0;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: rem(10px);
-      }
     }
+  }
 
-    &__header{
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-      gap: rem(10px);
+  &__title{
+    margin-bottom: rem(8px);
+    width: 80%;
+  }
+
+  &__catchphrase{
+    @include device(pocket){
+      padding: rem($ui-spacing) 0 0;
     }
+  }
 
-    &__details{
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      gap: rem(10px);
-      height: 0;
-      will-change: flex-grow;
-      transition: all var(--transition);
-      overflow: hidden;
-
-      &[aria-hidden="false"]{
-        flex-grow: 1;
-        overflow: initial;
-      }
-
-      &::-webkit-scrollbar{
-        display: none;
-      }
-
-      @include device(tablet){
-        height: 100%;
-        overflow: initial;
-      }
-
-      @include device(laptop-and-up){
-        height: 100%;
-        overflow: auto;
-        margin-right: rem(20px);
-      }
+  &__richtext{
+    @include device(pocket){
+      padding: 0 0 rem($ui-spacing);
     }
+  }
 
-    &__title{
-      margin-bottom: rem(8px);
-      width: 80%;
+  &__media{
+    position: relative;
+    flex: 1;
+
+  }
+
+  &__image{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__credits{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    padding: rem(5px) 0;
+    text-align: right;
+
+    span{
+      width: 100%;
+      margin-inline: rem($ui-spacing);
     }
+  }
 
-    &__catchphrase{
-      @include device(pocket){
-        padding: rem($layout-padding) 0 0;
-      }
-    }
-
-    &__richtext{
-      @include device(pocket){
-        padding: 0 0 rem($layout-padding);
-      }
-    }
-
-    &__media{
-      flex: 1;
-
-      &__credits{
-        @include device(pocket){
-          display: none;
-        }
-      }
-    }
-
-    &[data-key="cycle"]{
-      *{
-        color: var(--color-light);
-      }
-    }
+  &[data-key = 'cycle'] *{
+    color: var(--color-light);
   }
 }
 
+.agenda--void{
+  flex: 1;
+
+  *{
+    background: var(--color-black);
+  }
+}

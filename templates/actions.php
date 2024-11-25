@@ -8,11 +8,11 @@
 <?php if (!empty($actions)) : ?>
   <div class="grid grid-cols-4">
     <div class="actions__nav col-span-1">
-      <ul class="actions__nav__list">
+      <ul class="actions__list">
         <?php foreach ($actions as $i => $action) : ?>
           <li
-            class="actions__nav__item row row--<?= esc_attr($rows_count); ?>"
-            data-key="<?= esc_attr($action["name"]); ?>"
+            class="actions__item row row--<?= esc_attr($rows_count); ?>"
+            data-key="<?= esc_attr(rtrim($action["name"], 's')); ?>"
             data-index="<?= esc_attr($i + 1); ?>"
             style="background: <?= esc_attr($action["background"]); ?>;"
           >
@@ -24,8 +24,8 @@
       </ul>
     </div>
 
-    <div class="primary__carousel col-span-3">
-      <div class="primary__container primary__container--<?= esc_attr($rows_count); ?>">
+    <div class="actions__carousel col-span-3 only:lg">
+      <div class="actions__wrapper actions__wrapper--<?= esc_attr($rows_count); ?>">
         <?php foreach ($actions as $i => $action)
           render_action($action);
         ?>
@@ -50,21 +50,21 @@
     global $rows_count;
   ?>
     <div
-      class="primary__slide slide--<?= esc_attr($rows_count); ?>"
-      data-key="<?= esc_attr($action["name"]); ?>"
-      style="background: <?= esc_attr($action["background"]); ?>;"
+      class="actions__slide actions__slide--<?= esc_attr($rows_count); ?>"
+      data-key="<?= esc_attr(rtrim($action["name"], 's')); ?>"
+      style="background: <?= esc_attr($background); ?>;"
     >
-      <div class="primary__slide__infos">
-        <div class="primary__slide__richtext">
+      <div class="actions__slide__infos">
+        <div class="actions__slide__richtext">
           <div class="body body-md">
            <?= $richtext ?>
           </div>
         </div>
       </div>
-      <div class="primary__slide__media">
-        <img class="primary__slide__media__image" src="<?= esc_url($image_url) ?>" alt="<?= esc_attr($title) ?>" loading="lazy">
+      <div class="actions__slide__media">
+        <img class="actions__slide__image" src="<?= esc_url($image_url) ?>" alt="<?= esc_attr($title) ?>" loading="lazy">
         <?php if($image_credits_display): ?>
-          <div class="primary__slide__media__credits" style="background: <?= esc_attr($background); ?>">
+          <div class="actions__slide__credits" style="background: <?= esc_attr($background); ?>">
             <span class="body body-sm"><?= esc_html($image_credits); ?></span>
           </div>
         <?php endif ?>

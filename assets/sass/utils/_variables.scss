@@ -6,32 +6,32 @@
   --transition: 1s cubic-bezier(0.5, 0, 0.2, 1) 0s;
   --layout-padding: 15px;
 
-  --row-10-desktop: calc(100vh / 10);
-  --row-11-desktop: calc(100vh / 11);
-  --row-12-desktop: calc(100vh / 12);
-  --row-13-desktop: calc(100vh / 13);
-  --row-14-desktop: calc(100vh / 14);
-  --row-15-desktop: calc(100vh / 15);
-  --row-16-desktop: calc(100vh / 16);
-  --row-17-desktop: calc(100vh / 17);
-  --row-18-desktop: calc(100vh / 18);
-  --row-19-desktop: calc(100vh / 19);
-  --row-20-desktop: calc(100vh / 20);
+  --row-10-desktop: calc(100svh / 10);
+  --row-11-desktop: calc(100svh / 11);
+  --row-12-desktop: calc(100svh / 12);
+  --row-13-desktop: calc(100svh / 13);
+  --row-14-desktop: calc(100svh / 14);
+  --row-15-desktop: calc(100svh / 15);
+  --row-16-desktop: calc(100svh / 16);
+  --row-17-desktop: calc(100svh / 17);
+  --row-18-desktop: calc(100svh / 18);
+  --row-19-desktop: calc(100svh / 19);
+  --row-20-desktop: calc(100svh / 20);
 
-  --row-10-mobile: calc(100vh / 5);
-  --row-11-mobile: calc(100vh / 6);
-  --row-12-mobile: calc(100vh / 7);
-  --row-13-mobile: calc(100vh / 8);
-  --row-14-mobile: calc(100vh / 9);
-  --row-15-mobile: calc(100vh / 10);
-  --row-16-mobile: calc(100vh / 11);
-  --row-17-mobile: calc(100vh / 12);
-  --row-18-mobile: calc(100vh / 13);
-  --row-19-mobile: calc(100vh / 14);
-  --row-20-mobile: calc(100vh / 15);
+  --row-10-mobile: calc(100svh / 5);
+  --row-11-mobile: calc(100svh / 6);
+  --row-12-mobile: calc(100svh / 7);
+  --row-13-mobile: calc(100svh / 8);
+  --row-14-mobile: calc(100svh / 9);
+  --row-15-mobile: calc(100svh / 10);
+  --row-16-mobile: calc(100svh / 11);
+  --row-17-mobile: calc(100svh / 12);
+  --row-18-mobile: calc(100svh / 13);
+  --row-19-mobile: calc(100svh / 14);
+  --row-20-mobile: calc(100svh / 15);
 }
 
-$layout-padding: 15px;
+$ui-spacing: 15px;
 
 $font-xl-desktop: 20px;
 $font-xl-mobile: 22px;

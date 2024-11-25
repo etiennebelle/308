@@ -1,0 +1,55 @@
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+/*
+* This sheet is used to style the carousels common to
+* the About, Partners, Participate and Mentions sections
+* on mobile devices and tablets.
+*/
+
+.carousel{
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+
+  @include device(tablet-and-up){
+    margin: 0 $ui-spacing 0;
+  }
+}
+
+.carousel__wrapper{
+  display: flex;
+
+  @include device(laptop-and-up){
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    transform: none!important;
+  }
+}
+
+.carousel__slide{
+  position: relative;
+  display: flex;
+  flex: 0 0 100%;
+  flex-direction: column;
+  overflow: scroll;
+
+  @include device(tablet){
+    flex: 0 0 50%;
+  }
+
+  &__container{
+    padding: 0 $ui-spacing;
+
+    @include device(tablet-and-up){
+      width: 90%;
+      padding: $ui-spacing 0;
+    }
+  }
+}
+
+.carousel__item{
+  &--mb{
+    margin-bottom: $ui-spacing;
+  }
+}

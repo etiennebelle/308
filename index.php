@@ -1,14 +1,10 @@
 <?php
-  use Inc\Layout\Layout;
   use Inc\Cpt\Sections;
   use Inc\Cpt\Actions;
 
   get_header();
 
   global $rows_count;
-  global $colors;
-  $colors = Actions::getActionsColors();
-
   $open_default = get_field('index_active_section');
   $sections = Sections::getSections();
 ?>

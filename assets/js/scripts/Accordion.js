@@ -1,26 +1,35 @@
 export default class Accordion{
-  constructor(parentClassName, childClassName) {
-    this.parent = parentClassName;
-    this.children = childClassName;
+  constructor(parentSelector, childSelector, options = {}) {
+    this.parentSelector = parentSelector;
+    this.childSelector = childSelector;
+    this.activeClass = options.activeClass || `${childSelector.slice(1)}--active`;
+
     this.accordion = null;
   }
 
   init(){
-    if(!this.parent || !this.children) return;
+    this.accordion = document.querySelector(this.parentSelector);
 
-    this.accordion = document.querySelector(this.parent);
-    this.accordion.addEventListener('click', (e) => this.toggleActive(e.target.closest(this.children)));
+    this.accordion.addEventListener('click', this.handleClick.bind(this));
 
     return this.accordion;
   }
 
-  toggleActive(target){
-    const allChildren = document.querySelectorAll(this.children);
-    const activeClass = `${this.children.slice(1)}--active`;
+  handleClick(event) {
+    const target = event.target.closest(this.childSelector);
+    if (!target) return;
 
-    if(target.classList.contains(activeClass)) return;
-
-    allChildren.forEach(child => child.classList.remove(activeClass));
-    target.classList.add(activeClass);
+    this.toggleActive(target);
   }
+
+  toggleActive(target) {
+    const allChildren = document.querySelectorAll(this.childSelector);
+
+    if (target.classList.contains(this.activeClass)) return;
+
+    allChildren.forEach(child => child.classList.remove(this.activeClass));
+
+    target.classList.add(this.activeClass);
+  }
+
 }

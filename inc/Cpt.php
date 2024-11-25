@@ -29,7 +29,7 @@
       return [
         'name' => $post->post_name,
         'title' => get_the_title($post),
-        'richtext' => self::parseRichText(get_field('action_richtext', $post->ID)),
+        'richtext' => parseRichText(get_field('action_richtext', $post->ID)),
         'background' => get_field('action_background', $post->ID),
         'color' => get_field('action_color', $post->ID),
         'image' => get_field('action_image', $post->ID),
@@ -64,13 +64,4 @@
 
       return $colors;
     }
-
-    private static function parseRichText(string $content): string|array {
-      return preg_replace(
-        '#<a\b(?![^>]*class=)#',
-        '<a class="' . self::LINK_CLASS . '"',
-        apply_filters('the_content', $content)
-      );
-    }
-
   }

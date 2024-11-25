@@ -1,7 +1,7 @@
 
 import EmblaCarousel from "embla-carousel";
 
-export default class Carousel {
+class Carousel {
   constructor(selector, options = {}, controllers = {}){
     this.emblaNode = document.querySelector(selector);
     this.options = {
@@ -14,77 +14,130 @@ export default class Carousel {
 
   init(){
     this.emblaApi = EmblaCarousel(this.emblaNode, this.options);
-    this.setupNav();
     return this.emblaApi;
-  }
-
-  setupNav(){
-    const { prev, next, navItems } = this.controllers;
-
-    if(prev){
-      const prevButton = document.querySelector(prev);
-      if(prevButton){
-        prevButton.addEventListener('click', () => this.emblaApi.scrollPrev());
-      }
-    }
-
-    if(next){
-      const nextButton = document.querySelector(next);
-      if(nextButton){
-        nextButton.addEventListener('click', () => this.emblaApi.scrollNext());
-      }
-    }
-
-    if(navItems){
-      const navButtons = document.querySelectorAll(navItems);
-      navButtons.forEach((button) => {
-        const { key } = button.dataset;
-        button.addEventListener('click', () => {
-          this.findSlide(key);
-        });
-      })
-    }
-  }
-
-  findSlide(key){
-    return this.emblaApi.scrollTo(this.emblaApi.slideNodes().findIndex(s => s.dataset.key === key));
   }
 }
 
-export class AgendaCarousel extends Carousel {
+export class PrimaryCarousel extends Carousel{
+  constructor(selector, options = {}, controllers = {}) {
+    super(selector, options);
+    this.controllers = controllers;
+    this.prevButton = null;
+    this.nextButton = null;
+  }
+
+  init(){
+    super.init();
+    this.setupNavButtons();
+    return this.emblaApi;
+  }
+
+  setupNavButtons(){
+    const { prev, next } = this.controllers;
+
+    if (prev) {
+      this.prevButton = document.querySelector(prev);
+      if (this.prevButton) {
+        this.prevButton.addEventListener('click', () => this.emblaApi.scrollPrev());
+      }
+    }
+
+    if (next) {
+      this.nextButton = document.querySelector(next);
+      if (this.nextButton) {
+        this.nextButton.addEventListener('click', () => this.emblaApi.scrollNext());
+      }
+    }
+  }
+}
+
+export class AgendaCarousel extends PrimaryCarousel {
   constructor(selector, options = {}, controllers = {}) {
     super(selector, options, controllers);
-    this.expandedClass = 'primary__slide__infos--expanded';
+    this.expandedClass = 'agenda__slide__infos--expanded';
+    this.expandButtons = new Set();
   }
 
   init() {
     super.init();
     this.initExpandButtons();
+    return this.emblaApi;
   }
 
   initExpandButtons() {
-    document.querySelectorAll('.mobile-expand').forEach(this.initExpandButton.bind(this));
-  }
+    const buttons = this.emblaNode.querySelectorAll('.mobile-expand');
+    buttons.forEach(button => {
+      if (!button) return;
 
-  initExpandButton(button) {
-    button.addEventListener('click', () => {
-      const item = button.closest('.primary__slide');
-      if (!item) return;
+      const handleClick = () => {
+        const item = button.closest('.agenda__slide');
+        if (!item) return;
 
-      const wrapper = item.querySelector('.primary__slide__infos');
-      const details = wrapper.querySelector('.primary__slide__details');
+        const wrapper = item.querySelector('.agenda__slide__infos');
+        const details = wrapper?.querySelector('.agenda__slide__details');
 
-      this.toggleExpansion(item, wrapper, details, button);
+        this.toggleExpansion(wrapper, details, button);
+      };
+
+      button.addEventListener('click', handleClick);
+      this.expandButtons.add(button);
     });
   }
 
-  toggleExpansion(item, wrapper, details, button) {
-    if (!wrapper || !button) return;
+  toggleExpansion(wrapper, details, button) {
+    if (!wrapper || !details || !button) return;
 
     const isExpanded = wrapper.classList.contains(this.expandedClass);
-
-    wrapper.classList.toggle(this.expandedClass, !isExpanded);
+    wrapper.classList.toggle(this.expandedClass);
     button.setAttribute('aria-expanded', !isExpanded);
     details.setAttribute('aria-hidden', isExpanded);
+  }
+}
+
+export class ActionsCarousel extends PrimaryCarousel {
+  constructor(selector, options = {}, controllers = {}) {
+    super(selector, options, controllers);
+    this.navItems = new Map();
+  }
+
+  init() {
+    super.init();
+    this.setupNavItems();
+    return this.emblaApi;
+  }
+
+  setupNavItems() {
+    const { navItems } = this.controllers;
+    if (!navItems) return;
+
+    const buttons = document.querySelectorAll(navItems);
+    buttons.forEach(button => {
+      const { key } = button.dataset;
+      if (key) {
+        this.navItems.set(key, button);
+        button.addEventListener('click', () => this.scrollToKey(key));
+      }
+    });
+  }
+
+  scrollToKey(key) {
+    if (!this.emblaApi || !key) return;
+
+    const index = this.findSlideIndex(key);
+    if (index !== -1) {
+      this.emblaApi.scrollTo(index);
+      this.updateActiveNavItem(key);
+    }
+  }
+
+  findSlideIndex(key) {
+    return this.emblaApi.slideNodes().findIndex(slide => slide.dataset.key === key);
+  }
+
+  updateActiveNavItem(activeKey) {
+    this.navItems.forEach((button, key) => {
+      button.classList.toggle('active', key === activeKey);
+      button.setAttribute('aria-current', key === activeKey ? 'true' : 'false');
+    });
   }
 }

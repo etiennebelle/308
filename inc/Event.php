@@ -34,7 +34,7 @@
     {
       $this->id = $event['uid'];
       $this->title = ucwords($event['title'][self::LANG_FR]);
-      $this->keyword = $event['keywords'][self::LANG_FR][0];
+      $this->keyword = rtrim($event['keywords'][self::LANG_FR][0], 's');
       $this->links = $event['links'];
       $this->shortText = $event['description'][self::LANG_FR];
       $this->richText = $this->formatRichText($event['longDescription'][self::LANG_FR], $this->links);

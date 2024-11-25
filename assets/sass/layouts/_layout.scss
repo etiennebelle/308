@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   gap: rem(10px);
-  padding: 0 rem($layout-padding);
+  padding: 0 rem($ui-spacing);
 
   /*
   * Dynamically assigns a height value on mobile based on the number of sections/actions

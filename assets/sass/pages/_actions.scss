@@ -1,74 +1,116 @@
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 
-#actions__content {
-  .actions__nav{
-    &__list{
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-    }
+.actions__nav{
+  @include device(mobile){
+    grid-column: span 4;
+  }
+}
 
-    &__item{
-      cursor: pointer;
+.actions__list{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
 
-      &[data-key="cycles"] {
-        * {
-          color: var(--color-light);
-        }
-      }
-    }
 
-    @include device(mobile){
-      grid-column: span 4;
-    }
+.actions__item{
+  cursor: pointer;
+
+  &[data-key = 'cycle'] *{
+    color: var(--color-light);
+  }
+}
+
+.actions__carousel {
+  flex: 1;
+  overflow: hidden;
+}
+
+.actions__wrapper{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  /*
+  * Because of the Y axis of the carousel, we need to force the active slide container height
+  * to be calculated according to the number of actions.
+  */
+
+  @include dynamic-calc($op: multiply, $multiplier: var(--actions));
+
+  @include device(tablet-and-up) {
+    @include dynamic-calc($device: desktop, $op: multiply, $multiplier: var(--actions));
+  }
+}
+
+.actions__slide {
+  width: 100%;
+  position: relative;
+  flex: 0 0 100%;
+  display: flex;
+
+  @include dynamic-calc($op: multiply, $multiplier: var(--actions));
+
+  @include device(tablet-and-up) {
+    @include dynamic-calc($device: desktop, $op: multiply, $multiplier: var(--actions));
   }
 
-  .actions__nav__item:hover{
-    background: red;
+  @include device(tablet){
+    flex-direction: column;
   }
 
-  .primary__carousel {
-    @include device(mobile) {
+  &__infos {
+    display: flex;
+    position: relative;
+    flex: 1;
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
       display: none;
     }
   }
 
-  .primary__container {
-    flex-direction: column;
+  &__richtext {
+    padding: $ui-spacing;
   }
 
-  .primary__slide {
+  &__media{
+    flex: 2;
+    position: relative;
+
     @include device(tablet){
-      flex-direction: column;
+      display: none;
     }
+  }
 
-    &__infos {
-      flex: 1;
-      overflow: scroll;
+  &__image{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    object-position: center;
+  }
 
-      &::-webkit-scrollbar {
-        display: none;
-      }
+  &__credits{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    padding: rem(5px) 0;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+
+    span{
+      margin-inline: rem($ui-spacing);
     }
+  }
 
-    &__richtext {
-      padding: $layout-padding;
-    }
-
-    &__media {
-      flex: 2;
-
-      @include device(tablet){
-        display: none;
-      }
-    }
-
-    &[data-key="cycles"] {
-      * {
-        color: var(--color-light);
-      }
-    }
+  &[data-key = 'cycle'] *{
+    color: var(--color-light);
   }
 }

@@ -1,8 +1,13 @@
 <?php
   use Inc\Layout\Layout;
+  use Inc\Cpt\Actions;
 
   global $rows_count;
   $rows_count = Layout::getAdjustedRowsCount();
+
+  global $colors;
+  $colors = Actions::getActionsColors();
+
   $header_title = get_field('header_title');
   $header_title_min = get_field('header_title_minified');
 ?>
