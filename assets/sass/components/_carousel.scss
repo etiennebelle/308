@@ -39,7 +39,11 @@
   }
 
   &__container{
-    padding: 0 $ui-spacing;
+    padding: $ui-spacing $ui-spacing 0;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: $ui-spacing;
 
     @include device(tablet-and-up){
       width: 90%;
@@ -48,8 +52,17 @@
   }
 }
 
+.carousel__list{
+  display: flex;
+  flex-direction: column;
+}
+
 .carousel__item{
   &--mb{
     margin-bottom: $ui-spacing;
   }
+}
+
+.carousel__field{
+  width: 90%;
 }

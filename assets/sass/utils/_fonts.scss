@@ -34,7 +34,6 @@
 }
 
 .headline{
-  display: inline-flex;
   font-family: 'NeueMontreal-Medium', 'sans-serif';
   color: var(--color-black);
   letter-spacing: rem(0.75px);
@@ -66,7 +65,7 @@
   font-family: 'NeueMontreal-Medium', 'sans-serif';
   color: var(--color-black);
   letter-spacing: rem(0.75px);
-  line-height: 1.1;
+  line-height: 1.2;
 
   &-lt{
     color: var(--color-light);

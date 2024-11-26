@@ -1,0 +1,49 @@
+@use '../utils/mixins' as *;
+
+.btn{
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: rem(2px) solid var(--color-black);
+  padding: rem(10px) rem(25px);
+  transition: all 0.15s ease-in-out;
+
+  @include device(tablet-and-up){
+    .body{
+      transform: translateY(rem(2px));
+    }
+  }
+
+  &-up{
+    text-transform: uppercase;
+  }
+
+  &-fill{
+    background: var(--color-black);
+
+    .body{
+      color: var(--color-light);
+    }
+
+    &:hover{
+      background: transparent;
+
+      .body{
+        color: var(--color-black);
+      }
+    }
+  }
+
+  &-out{
+    background: transparent;
+
+    &:hover{
+      background: var(--color-black);
+
+      .body{
+        color: var(--color-light);
+      }
+    }
+  }
+}

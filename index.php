@@ -1,6 +1,5 @@
 <?php
   use Inc\Cpt\Sections;
-  use Inc\Cpt\Actions;
 
   get_header();
 
@@ -27,8 +26,8 @@
             id="<?= esc_attr($key) ?>__heading"
             class="section__heading row row--<?= esc_attr($rows_count); ?>"
         >
-          <?php for($j = 0; $j < 2; $j++) : ?>
-            <h2 class="section__heading__title col-<?= ($j + 1) * 2 - 1 ?>-start<?= $j % 2 === 1 ? ' only:lg' : ''; ?>">
+          <?php for($i = 0; $i < 2; $i++) : ?>
+            <h2 class="section__heading__title col-<?= ($i + 1) * 2 - 1 ?>-start<?= $i % 2 === 1 ? ' only:lg' : ''; ?>">
               <span class="headline headline-xl"><?= esc_html($title); ?></span>
             </h2>
           <?php endfor ?>
