@@ -1,7 +1,5 @@
 <?php
-  namespace Inc\Agenda;
-
-  use Inc\Agenda\Event;
+  namespace Inc;
 
   class Agenda
   {

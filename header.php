@@ -1,6 +1,6 @@
 <?php
-  use Inc\Layout\Layout;
-  use Inc\Cpt\Actions;
+  use Inc\Layout;
+  use Inc\Actions;
 
   global $rows_count;
   $rows_count = Layout::getAdjustedRowsCount();

@@ -1,5 +1,5 @@
 <?php
-  namespace Inc\Layout;
+  namespace Inc;
 
   class Layout {
     public static function getPostCount($post_type): int{

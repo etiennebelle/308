@@ -16,9 +16,11 @@
             <div class="carousel__field">
               <p class="body body-md"><?= wp_kses_post($membership_richtext); ?></p>
             </div>
-            <a class="btn btn-out btn-up" href="<?= esc_url($membership_cta_url); ?>" target="_blank">
-              <span class="body body-md"><?= esc_html($membership_cta_text); ?></span>
-            </a>
+            <div class="carousel__cta">
+              <a class="btn btn-out btn-up" href="<?= esc_url($membership_cta_url); ?>" target="_blank">
+                <span class="body body-md"><?= esc_html($membership_cta_text); ?></span>
+              </a>
+            </div>
           </div>
         </div>
       <?php endwhile ?>
@@ -29,6 +31,7 @@
         the_row();
         $newsletter_title = get_sub_field('newsletter_title');
         $newsletter_richtext = get_sub_field('newsletter_richtext');
+        $newsletter_placeholder = get_sub_field('newsletter_cta_placeholder');
       ?>
         <div class="carousel__slide col-span-2">
           <div class="carousel__slide__container">
@@ -37,6 +40,15 @@
             </h4>
             <div class="carousel__field">
               <p class="body body-md"><?= wp_kses_post($newsletter_richtext); ?></p>
+            </div>
+            <div class="carousel__form">
+              <form action="" method="post" id="form">
+                <label for="email"></label>
+                <input id="email" type="email" name="email" required="required" class="body body-md" placeholder="<?= esc_attr($newsletter_placeholder); ?>">
+                <button class="btn btn-out">
+                  <span>↣</span>
+                </button>
+              </form>
             </div>
           </div>
         </div>

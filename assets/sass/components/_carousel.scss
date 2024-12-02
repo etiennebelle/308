@@ -15,54 +15,62 @@
   @include device(tablet-and-up){
     margin: 0 $ui-spacing 0;
   }
-}
 
-.carousel__wrapper{
-  display: flex;
-
-  @include device(laptop-and-up){
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    transform: none!important;
-  }
-}
-
-.carousel__slide{
-  position: relative;
-  display: flex;
-  flex: 0 0 100%;
-  flex-direction: column;
-  overflow: scroll;
-
-  @include device(tablet){
-    flex: 0 0 50%;
-  }
-
-  &__container{
-    padding: $ui-spacing $ui-spacing 0;
+  &__wrapper{
     display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: $ui-spacing;
 
-    @include device(tablet-and-up){
-      width: 90%;
-      padding: $ui-spacing 0;
+    @include device(laptop-and-up){
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      transform: none!important;
     }
   }
-}
 
-.carousel__list{
-  display: flex;
-  flex-direction: column;
-}
+  &__slide{
+    position: relative;
+    display: flex;
+    flex: 0 0 100%;
+    flex-direction: column;
+    overflow: scroll;
 
-.carousel__item{
-  &--mb{
-    margin-bottom: $ui-spacing;
+    @include device(tablet){
+      flex: 0 0 50%;
+    }
+
+    &__container{
+      padding: $ui-spacing $ui-spacing 0;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap: $ui-spacing;
+
+      @include device(tablet-and-up){
+        width: 90%;
+        padding: $ui-spacing 0;
+      }
+    }
+  }
+
+  &__list{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item{
+    &--mb{
+      margin-bottom: $ui-spacing;
+    }
+  }
+
+  &__field{
+    width: 90%;
+  }
+
+  &__cta,
+  &__form{
+    width: 100%;
+    margin-top: $ui-spacing;
   }
 }
 
-.carousel__field{
-  width: 90%;
-}
+

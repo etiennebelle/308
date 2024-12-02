@@ -10,7 +10,7 @@
   transition: all 0.15s ease-in-out;
 
   @include device(tablet-and-up){
-    .body{
+    *{
       transform: translateY(rem(2px));
     }
   }
@@ -22,14 +22,14 @@
   &-fill{
     background: var(--color-black);
 
-    .body{
+    *{
       color: var(--color-light);
     }
 
     &:hover{
       background: transparent;
 
-      .body{
+      *{
         color: var(--color-black);
       }
     }
@@ -41,7 +41,7 @@
     &:hover{
       background: var(--color-black);
 
-      .body{
+      *{
         color: var(--color-light);
       }
     }

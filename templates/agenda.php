@@ -1,5 +1,5 @@
 <?php
-  use Inc\Agenda\Agenda;
+  use Inc\Agenda;
 
   global $colors;
   $agenda = new Agenda($_ENV['AGENDA_UID'], $_ENV['AGENDA_API_KEY'], $colors);

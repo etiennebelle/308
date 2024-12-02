@@ -1,5 +1,5 @@
 <?php
-  namespace Inc\Cpt;
+  namespace Inc;
 
   abstract class Cpt {
     protected static string $postType = '';

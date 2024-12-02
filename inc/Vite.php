@@ -32,6 +32,10 @@
         wp_enqueue_script('main', get_theme_file_uri('dist/' . $manifest['assets/js/main.js']['file']), [], null, true);
         wp_enqueue_style('main', get_theme_file_uri('dist/' . $manifest['assets/sass/main.scss']['file']));
       }
+
+      wp_localize_script('main', 'wpApiSettings', [
+        'ajaxUrl' => admin_url('admin-ajax.php'),
+      ]);
     }
 
     public function asset_url($path): string {

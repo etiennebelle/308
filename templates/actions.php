@@ -1,5 +1,5 @@
 <?php
-  use Inc\Cpt\Actions;
+  use Inc\Actions;
 
   global $rows_count;
   $actions = Actions::getActions();

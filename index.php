@@ -1,5 +1,5 @@
 <?php
-  use Inc\Cpt\Sections;
+  use Inc\Sections;
 
   get_header();
 

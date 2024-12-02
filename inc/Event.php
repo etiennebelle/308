@@ -1,5 +1,5 @@
 <?php
-  namespace Inc\Agenda;
+  namespace Inc;
   class Event
   {
     private const LANG_FR = 'fr';

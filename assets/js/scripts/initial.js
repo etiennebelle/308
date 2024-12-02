@@ -34,9 +34,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const parent = container.closest('.section');
     const prevButton = `#${parent.id} .ctrl--prev`;
     const nextButton = `#${parent.id} .ctrl--next`;
+    console.log(prevButton, nextButton);
 
     new PrimaryCarousel(
-      '.carousel',
+      `#${parent.id} .carousel`,
       {
         loop: false,
         align: 'start'
