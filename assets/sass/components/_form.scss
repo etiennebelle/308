@@ -1,19 +1,22 @@
 @use '../utils/mixins' as *;
 
 #form{
-  box-sizing: border-box;
   width: 100%;
-  display: flex;
+  display: inline-flex;
   border: rem(2px) solid var(--color-black);
 
   @include device(laptop-and-up){
     width: 50%;
   }
+  
+  label{
+    display: none;
+  }
 
   input{
     flex: 1;
     padding: rem(10px) rem(10px);
-    transform: translateY(rem(2px));
+    line-height: 0;
 
     &::placeholder{
       color: var(--color-black);
@@ -27,18 +30,19 @@
       -webkit-box-shadow: 0 0 0 1000px var(--color-light) inset;
       box-shadow: 0 0 0 1000px var(--color-light) inset;
       color: var(--color-black);
-      border-bottom: 2px solid var(--color-black);
     }
   }
 
 
   button{
-    padding: rem(10px) rem(25px);
+    padding: rem(10px) rem(20px);
     border: 0;
     border-left: rem(2px) solid var(--color-black);
 
     span{
-      transform: translateY(0);
+      font-size: rem(42px);
+      line-height: 0;
+      transform: none;
     }
   }
 }

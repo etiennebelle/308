@@ -69,7 +69,12 @@
   &__cta,
   &__form{
     width: 100%;
-    margin-top: $ui-spacing;
+  }
+  
+  &__form{
+    display: flex;
+    flex-direction: column;
+    gap: $ui-spacing;
   }
 }
 

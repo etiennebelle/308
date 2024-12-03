@@ -31,7 +31,7 @@
         the_row();
         $newsletter_title = get_sub_field('newsletter_title');
         $newsletter_richtext = get_sub_field('newsletter_richtext');
-        $newsletter_placeholder = get_sub_field('newsletter_cta_placeholder');
+        $newsletter_placeholder = get_sub_field('newsletter_input_placeholder');
       ?>
         <div class="carousel__slide col-span-2">
           <div class="carousel__slide__container">
@@ -44,11 +44,13 @@
             <div class="carousel__form">
               <form action="" method="post" id="form">
                 <label for="email"></label>
+                <input id="post_id" type="hidden" name="post_id" value="<?= esc_attr(get_the_ID()); ?>">
                 <input id="email" type="email" name="email" required="required" class="body body-md" placeholder="<?= esc_attr($newsletter_placeholder); ?>">
                 <button class="btn btn-out">
-                  <span>↣</span>
+                  <span class="body-alt body-alt-xl">↣</span>
                 </button>
               </form>
+              <div class="form-message"></div>
             </div>
           </div>
         </div>
