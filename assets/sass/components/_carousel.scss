@@ -18,6 +18,7 @@
 
   &__wrapper{
     display: flex;
+    height: 100%;
 
     @include device(laptop-and-up){
       display: grid;
@@ -31,18 +32,24 @@
     display: flex;
     flex: 0 0 100%;
     flex-direction: column;
-    overflow: scroll;
+    height: 100%;
+    overflow: hidden;
 
     @include device(tablet){
       flex: 0 0 50%;
     }
 
     &__container{
-      padding: $ui-spacing $ui-spacing 0;
+      padding: $ui-spacing;
       display: flex;
       flex-direction: column;
       align-items: start;
       gap: $ui-spacing;
+      overflow: auto;
+      
+      &::-webkit-scrollbar{
+        display: none;
+      }
 
       @include device(tablet-and-up){
         width: 90%;

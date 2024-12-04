@@ -1,6 +1,7 @@
 @use '../utils/mixins' as *;
 
 #form{
+  box-sizing: border-box;
   width: 100%;
   display: inline-flex;
   border: rem(2px) solid var(--color-black);

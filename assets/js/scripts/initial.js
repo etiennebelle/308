@@ -14,8 +14,8 @@ window.addEventListener('DOMContentLoaded', () => {
     '.agenda__carousel',
     { loop: true },
     {
-      prev: '#agenda .ctrl--prev',
-      next: '#agenda .ctrl--next'
+      prev: '#agenda .ctrl--prev svg',
+      next: '#agenda .ctrl--next svg'
     }
   );
   agendaCarousel.init();

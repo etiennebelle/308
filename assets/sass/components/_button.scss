@@ -9,11 +9,10 @@
   padding: rem(10px) rem(25px);
   transition: all 0.15s ease-in-out;
 
-  @include device(tablet-and-up){
-    *{
-      transform: translateY(rem(2px));
-    }
+  span{
+    transform: translateY(rem(2px));
   }
+
 
   &-up{
     text-transform: uppercase;
