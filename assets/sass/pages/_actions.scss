@@ -1,6 +1,12 @@
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 
+#actions{
+  .section__heading__control{
+    display: none;
+  }
+}
+
 .actions__nav{
   @include device(mobile){
     grid-column: span 4;
@@ -66,14 +72,12 @@
     position: relative;
     flex: 1;
     overflow: scroll;
+    margin-bottom: $ui-spacing;
+    padding: $ui-spacing;
 
     &::-webkit-scrollbar {
       display: none;
     }
-  }
-
-  &__richtext {
-    padding: $ui-spacing;
   }
 
   &__media{

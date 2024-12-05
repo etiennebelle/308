@@ -22,7 +22,7 @@
                   <?php if (!empty($value)): ?>
                     <?php if (is_string($value)): ?>
                       <li class="carousel__item<?= $class ?>">
-                        <p class="body body-xl">
+                        <p class="body body-xl <?= $key == "mail" ? "body-link" : "" ?>">
                           <?php if ($key == "mail"): ?>
                             <a href="mailto: <?= esc_attr($value); ?>" class="carousel__link">
                               <span><?= esc_html($value); ?></span>
@@ -99,7 +99,7 @@
             ?>
               <li class="carousel__item">
                 <a class="carousel__link" href="<?= esc_url($about_partners_url); ?>" target="_blank">
-                  <p class="body body-md"><?= esc_html($about_partners_name); ?></p>
+                  <p class="body body-md body-link"><?= esc_html($about_partners_name); ?></p>
                 </a>
               </li>
             <?php endwhile ?>
@@ -124,7 +124,7 @@
           ?>
             <li class="carousel__item">
               <a class="carousel__link" href="<?= esc_url($about_files_url); ?>" target="_blank">
-                <span class="body body-md"><?= esc_html($about_files_title); ?></span>
+                <span class="body body-md body-link"><?= esc_html($about_files_title); ?></span>
               </a>
             </li>
           <?php endwhile ?>

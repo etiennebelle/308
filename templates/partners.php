@@ -56,7 +56,7 @@
                 ?>
                   <li class="carousel__item">
                     <a class="carousel__link" href="<?= esc_url($item_url); ?>" target="_blank">
-                      <p class="body body-md"><?= esc_html($item_name); ?></p>
+                      <p class="body body-md body-link"><?= esc_html($item_name); ?></p>
                     </a>
                   </li>
                 <?php endwhile ?>

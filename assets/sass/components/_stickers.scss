@@ -1,0 +1,52 @@
+@use '../utils/mixins' as *;
+@use '../utils/variables' as *;
+
+.sticker{
+  cursor: pointer!important;
+  z-index: 9999;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: rem(60px);
+  height: rem(60px);
+  padding: rem(12px);
+
+  @include device(tablet-and-up){
+    width: rem(70px);
+    height: rem(70px);
+    padding: rem(15px);
+  }
+
+  &--rounded{
+    border-radius: 50%;
+  }
+
+  &__icon, a{
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    svg{
+      height: 100%;
+    }
+  }
+
+  &#radio_player_sticker{
+    svg{
+      transform: translateX(1px);
+    }
+  }
+
+  &#member_sticker{
+    svg{
+      transform: translateY(rem(2px));
+
+      path{
+        fill: var(--color-light);
+      }
+    }
+  }
+}

@@ -9,7 +9,6 @@
   $colors = Actions::getActionsColors();
 
   $header_title = get_field('header_title');
-  $header_title_min = get_field('header_title_minified');
 ?>
 
 <!DOCTYPE html>
@@ -35,19 +34,12 @@
 
 <header class="header">
   <div class="header__wrapper row row--<?= esc_attr($rows_count) ?>">
-    <div class="header__col col-span-3">
-      <div class="header__title only:xl">
-        <h1 class="headline headline-xl headline-lt headline-up">
-          <?= esc_html($header_title); ?>
-        </h1>
+    <?php for($i = 0; $i < 2; $i++) : ?>
+      <div class="header__col col-<?= ($i + 1) * 2 - 1 ?>-start<?= $i % 2 === 1 ? ' only:lg' : ''; ?>">
+        <h1 class="header__title headline headline-xl headline-lt headline-up"><?= esc_html($header_title); ?></h1>
       </div>
-      <div class="header__title only:md">
-        <h1 class="headline headline-xl headline-lt headline-up">
-          <?= esc_html($header_title_min); ?>
-        </h1>
-      </div>
-    </div>
-    <div class="header__col col-span-1">
+    <?php endfor ?>
+    <div class="header__col col-4-start col-end">
       <button
           class="header-btn"
           aria-expanded="false"
@@ -66,7 +58,7 @@
     </div>
   </div>
 
-  <div id="header-menu" class="header__menu header__menu--<?= esc_attr($rows_count) ?>" aria-hidden="true">
+  <div id="header-menu" class="header__menu header__menu--<?= esc_attr($rows_count) ?> header__menu--full" aria-hidden="true">
     <nav class="header__menu__nav">
       <ul class="header__menu__nav__list">
         <?php render_menu('header_links', $rows_count); ?>
@@ -91,6 +83,9 @@
           $url = get_sub_field("{$sub_field}_url");
           ?>
           <li class="header__menu__title row row--<?= esc_attr($rows_count) ?>">
+            <div class="header__menu__icon">
+              <?php include 'components/svg/arrow-next.svg'; ?>
+            </div>
             <a class="header__menu__link col-full" href="<?= esc_url($url) ?>" target="_blank">
               <span class="headline headline-xl headline-lt headline-up"><?= esc_html($title) ?></span>
             </a>

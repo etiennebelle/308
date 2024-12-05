@@ -10,9 +10,9 @@
       ?>
         <div class="carousel__slide col-span-2">
           <div class="carousel__slide__container">
-            <h4 class="carousel__title">
+            <h3 class="carousel__title">
               <span class="body body-xl"><?= esc_html($membership_title); ?></span>
-            </h4>
+            </h3>
             <div class="carousel__field">
               <p class="body body-md"><?= wp_kses_post($membership_richtext); ?></p>
             </div>
@@ -35,9 +35,9 @@
       ?>
         <div class="carousel__slide col-span-2">
           <div class="carousel__slide__container">
-            <h4 class="carousel__title">
+            <h3 class="carousel__title">
               <span class="body body-xl"><?= esc_html($newsletter_title); ?></span>
-            </h4>
+            </h3>
             <div class="carousel__field">
               <p class="body body-md"><?= wp_kses_post($newsletter_richtext); ?></p>
             </div>
@@ -45,8 +45,8 @@
               <form action="" method="post" id="form">
                 <label for="email"></label>
                 <input id="post_id" type="hidden" name="post_id" value="<?= esc_attr(get_the_ID()); ?>">
-                <input id="email" type="email" name="email" required="required" class="body body-md" placeholder="<?= esc_attr($newsletter_placeholder); ?>">
-                <button class="btn btn-out">
+                <input id="email" type="email" name="email" required="required" class="body body-md" placeholder="<?= esc_attr($newsletter_placeholder); ?>" autocomplete="email">
+                <button type="submit" class="btn btn-out">
                   <span class="body-alt body-alt-xl">↣</span>
                 </button>
               </form>

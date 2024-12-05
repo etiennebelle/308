@@ -79,6 +79,22 @@
     text-decoration: underline;
   }
 
+  &-link{
+    &:hover{
+      text-decoration: underline;
+      text-transform: uppercase;
+      letter-spacing: rem(0.25px);
+      font-family: "Mondwest-Bold", serif;
+      font-weight: 700;
+    }
+  }
+
+  &-alt{
+    font-family: 'Mondwest-Bold', 'serif';
+    color: var(--color-black);
+    letter-spacing: rem(0.25px);
+  }
+
   &-xl{
     font-size: rem($font-xl-mobile);
 
@@ -100,48 +116,6 @@
 
     @include device(laptop-and-up){
       font-size: vw($font-sm-desktop);
-    }
-  }
-}
-
-.body-alt{
-  font-family: 'Mondwest-Bold', 'serif';
-  color: var(--color-black);
-  letter-spacing: rem(0.75px);
-
-  &-lt{
-    color: var(--color-light);
-  }
-
-  &-up{
-    text-transform: uppercase;
-  }
-
-  &-ul{
-    text-decoration: underline;
-  }
-
-  &-xl{
-    font-size: rem(calc($font-xl-mobile + 2px));
-
-    @include device(laptop-and-up){
-      font-size: vw(calc($font-xl-desktop + 2px));
-    }
-  }
-
-  &-md{
-    font-size: rem(calc($font-md-mobile + 2px));
-
-    @include device(laptop-and-up){
-      font-size: vw(calc($font-md-desktop + 2px));
-    }
-  }
-
-  &-sm{
-    font-size: rem(calc($font-sm-mobile + 2px));
-
-    @include device(laptop-and-up){
-      font-size: vw(calc($font-sm-desktop + 2px));
     }
   }
 }

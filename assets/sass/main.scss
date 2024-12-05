@@ -6,9 +6,10 @@
 @use 'components/button';
 @use 'components/form';
 @use 'components/carousel';
+@use 'components/header';
+@use 'components/stickers';
 
 @use 'layouts/layout';
-@use 'layouts/header';
 
 @use 'pages/home';
 @use 'pages/agenda';
