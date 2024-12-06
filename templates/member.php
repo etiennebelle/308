@@ -19,6 +19,12 @@
             <div class="carousel__cta">
               <a class="btn btn-out btn-up" href="<?= esc_url($membership_cta_url); ?>" target="_blank">
                 <span class="body body-md"><?= esc_html($membership_cta_text); ?></span>
+                <?php
+                  $heart_full = get_template_directory() . '/components/svg/heart-full.svg';
+                  if (file_exists($heart_full)) {
+                    include $heart_full;
+                  }
+                ?>
               </a>
             </div>
           </div>
@@ -47,7 +53,12 @@
                 <input id="post_id" type="hidden" name="post_id" value="<?= esc_attr(get_the_ID()); ?>">
                 <input id="email" type="email" name="email" required="required" class="body body-md" placeholder="<?= esc_attr($newsletter_placeholder); ?>" autocomplete="email">
                 <button type="submit" class="btn btn-out">
-                  <span class="body-alt body-alt-xl">↣</span>
+                  <?php
+                    $arrow_next = get_template_directory() . '/components/svg/arrow-next.svg';
+                    if (file_exists($arrow_next)) {
+                      include $arrow_next;
+                    }
+                  ?>
                 </button>
               </form>
               <div class="form-message"></div>

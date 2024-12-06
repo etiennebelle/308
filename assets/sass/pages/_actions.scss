@@ -27,6 +27,18 @@
   &[data-key = 'cycle'] *{
     color: var(--color-light);
   }
+
+  &:not(.active):hover{
+    h3{
+      font-family: "Mondwest-Bold", serif;
+      font-weight: 700;
+      font-size: rem(22px);
+
+      @include device(laptop-and-up){
+        font-size: vw(22px);
+      }
+    }
+  }
 }
 
 .actions__carousel {
@@ -71,17 +83,33 @@
     display: flex;
     position: relative;
     flex: 1;
+    max-width: 33.33%;
     overflow: scroll;
-    margin-bottom: $ui-spacing;
     padding: $ui-spacing;
 
     &::-webkit-scrollbar {
       display: none;
     }
+
+    @include device(tablet){
+      max-width: 100%;
+    }
+  }
+
+  &__richtext{
+    width: 95%;
+
+    &:after{
+      content: '';
+      display: block;
+      width: 100%;
+      height: $ui-spacing;
+    }
   }
 
   &__media{
     flex: 2;
+    max-width: 66.66%;
     position: relative;
 
     @include device(tablet){

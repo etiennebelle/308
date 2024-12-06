@@ -115,7 +115,7 @@
     @include device(laptop-and-up){
       height: 100%;
       overflow: auto;
-      margin-right: rem(20px);
+      width: 95%;
     }
   }
 

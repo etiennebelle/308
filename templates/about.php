@@ -5,8 +5,12 @@
         <div class="carousel__slide__container">
             <ul class="carousel__list">
               <?php while (have_rows('about_infos')): the_row();
+                $about_infos_header = get_sub_field('about_infos_logo') ?? null;
                 $about_infos = [
-                  'name' => get_sub_field('about_infos_name'),
+                  'logo' => ($about_infos_header === 'logo') && file_exists(get_template_directory() . '/components/svg/logo.svg')
+                    ? get_template_directory() . '/components/svg/logo.svg'
+                    : null,
+                  'name' => $about_infos_header === 'name' ? get_sub_field('about_infos_name') : "",
                   'address' => get_sub_field('about_infos_address'),
                   'phone' => get_sub_field('about_infos_phone'),
                   'mail' => get_sub_field('about_infos_mail'),
@@ -17,14 +21,20 @@
                 ];
                 ?>
                 <?php foreach ($about_infos as $key => $value):
-                  $class = in_array($key, ['name', 'address', 'mail', 'visit']) ? ' carousel__item--mb' : null;
+                  $class = in_array($key, ['logo', 'name', 'address', 'mail', 'visit']) ? 'carousel__item carousel__item--mb' : 'carousel__item';
                   ?>
-                  <?php if (!empty($value)): ?>
+                  <?php if ($key === 'logo' && isset($value) && file_exists($value)): ?>
+                    <li class="<?= $class ?>">
+                      <div class="carousel__logo">
+                        <?php include $value; ?>
+                      </div>
+                    </li>
+                  <?php elseif (!empty($value)): ?>
                     <?php if (is_string($value)): ?>
-                      <li class="carousel__item<?= $class ?>">
+                      <li class="<?= $class ?>">
                         <p class="body body-xl <?= $key == "mail" ? "body-link" : "" ?>">
                           <?php if ($key == "mail"): ?>
-                            <a href="mailto: <?= esc_attr($value); ?>" class="carousel__link">
+                            <a href="mailto: <?= esc_url($value); ?>" class="carousel__link">
                               <span><?= esc_html($value); ?></span>
                             </a>
                           <?php else: ?>
@@ -33,7 +43,7 @@
                         </p>
                       </li>
                     <?php elseif (is_array($value)): ?>
-                      <li class="carousel__item<?= $class ?>">
+                      <li class="<?= $class ?>">
                         <ul class="carousel__list">
                           <?php foreach ($value as $repeater_field): ?>
                             <?php if (!empty($repeater_field['about_infos_visit_transport'])): ?>
@@ -79,7 +89,7 @@
               $about_office_job = get_sub_field('about_office_job');
             ?>
               <li class="carousel__item">
-                <p class="body body-md"><?= esc_html($about_office_name); ?></p>
+                <p class="body body-md"><?= esc_html($about_office_name); ?>,</p>
                 <p class="body body-md"><?= esc_html($about_office_job); ?></p>
               </li>
             <?php endwhile ?>

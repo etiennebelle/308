@@ -22,7 +22,7 @@
     border-radius: 50%;
   }
 
-  &__icon, a{
+  &__icon, a,{
     flex-basis: 100%;
     display: flex;
     justify-content: center;
@@ -31,6 +31,13 @@
 
     svg{
       height: 100%;
+      transition: scale 0.2s ease-in-out;
+    }
+  }
+
+  &:hover{
+    svg{
+      scale: 1.1;
     }
   }
 
