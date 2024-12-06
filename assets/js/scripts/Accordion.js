@@ -1,3 +1,7 @@
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollToPlugin);
 export default class Accordion{
   constructor(parentSelector, childSelector, options = {}) {
     this.parentSelector = parentSelector;
@@ -20,6 +24,7 @@ export default class Accordion{
     if (!target) return;
 
     this.toggleActive(target);
+    this.scrollIntoActiveSection(target);
   }
 
   toggleActive(target) {
@@ -32,4 +37,16 @@ export default class Accordion{
     target.classList.add(this.activeClass);
   }
 
+  scrollIntoActiveSection(target) {
+    const headerHeight = target.querySelector('.section__heading').getBoundingClientRect().height;
+    const index = parseInt(target.getAttribute('data-index'));
+
+    const scrollOffset = index * headerHeight - headerHeight;
+
+    gsap.to(window, {
+      duration: 1,
+      scrollTo: scrollOffset,
+      ease: "power2.out"
+    });
+  }
 }

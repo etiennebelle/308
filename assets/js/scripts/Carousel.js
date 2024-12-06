@@ -1,4 +1,4 @@
-
+import { gsap } from 'gsap';
 import EmblaCarousel from "embla-carousel";
 
 class Carousel {
@@ -65,17 +65,13 @@ export class AgendaCarousel extends PrimaryCarousel {
   }
 
   initExpandButtons() {
-    const buttons = this.emblaNode.querySelectorAll('.mobile-expand');
-    buttons.forEach(button => {
+    this.emblaApi.slideNodes().forEach(slide => {
+      const button = slide.querySelector('.mobile-expand');
       if (!button) return;
 
       const handleClick = () => {
-        const item = button.closest('.agenda__slide');
-        if (!item) return;
-
-        const wrapper = item.querySelector('.agenda__slide__infos');
+        const wrapper = slide.querySelector('.agenda__slide__infos');
         const details = wrapper?.querySelector('.agenda__slide__details');
-
         this.toggleExpansion(wrapper, details, button);
       };
 
@@ -91,6 +87,12 @@ export class AgendaCarousel extends PrimaryCarousel {
     wrapper.classList.toggle(this.expandedClass);
     button.setAttribute('aria-expanded', !isExpanded);
     details.setAttribute('aria-hidden', isExpanded);
+
+    gsap.to(wrapper, {
+      duration: 0.5,
+      height: isExpanded ? 'auto' : details.offsetHeight,
+      ease: 'power2.out'
+    });
   }
 }
 

@@ -58,7 +58,7 @@
 
   &__container{
     position: relative;
-    padding: rem($ui-spacing);
+    padding: rem($ui-spacing) rem($ui-spacing) 0;
     margin-right: rem(20px);
     display: flex;
     flex-direction: column;
@@ -72,6 +72,7 @@
 
     @include device(laptop-and-up){
       margin: 0;
+      padding: rem($ui-spacing);
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: rem(10px);
