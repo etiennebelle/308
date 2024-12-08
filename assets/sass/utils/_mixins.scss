@@ -42,7 +42,7 @@
   }
 }
 
-@mixin dynamic-calc($device: mobile, $op: subtract, $unit: svh, $multiplier: 1){
+@mixin dynamic-calc($device: mobile, $op: subtract, $unit: vh, $multiplier: 1){
   @for $i from 10 through 20 {
     &--#{$i} {
       height: calc-responsive-size($device, $i, $op, $unit, $multiplier);
