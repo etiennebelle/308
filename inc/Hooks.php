@@ -2,7 +2,7 @@
 
   function parseRichText($text, $args = []): string {
     $defaults = [
-      'link_class' => 'body body-alt body-md body-up body-link',
+      'link_class' => 'body body-link', /* body-alt body-md body-up */
       'external_only' => false,
       'add_blank' => true
     ];

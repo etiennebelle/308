@@ -14,20 +14,6 @@ class Carousel {
 
   init(){
     this.emblaApi = EmblaCarousel(this.emblaNode, this.options);
-    return this.emblaApi;
-  }
-}
-
-export class PrimaryCarousel extends Carousel{
-  constructor(selector, options = {}, controllers = {}) {
-    super(selector, options);
-    this.controllers = controllers;
-    this.prevButton = null;
-    this.nextButton = null;
-  }
-
-  init(){
-    super.init();
     this.setupNavButtons();
     return this.emblaApi;
   }
@@ -51,7 +37,35 @@ export class PrimaryCarousel extends Carousel{
   }
 }
 
-export class AgendaCarousel extends PrimaryCarousel {
+export class PrimaryCarousel extends Carousel{
+  constructor(selector, options = {}, controllers = {}) {
+    super(selector, options);
+    this.controllers = controllers;
+    this.prevButton = null;
+    this.nextButton = null;
+  }
+
+  init(){
+    super.init();
+    this.setupControlVisibility();
+    return this.emblaApi;
+  }
+
+  setupControlVisibility() {
+    const updateButtonVisibility = (button, canScroll) => {
+      button.style.visibility = canScroll ? "visible" : "hidden";
+    };
+
+    updateButtonVisibility(this.prevButton, false);
+
+    this.emblaApi.on('select', () => {
+      updateButtonVisibility(this.prevButton, this.emblaApi.canScrollPrev());
+      updateButtonVisibility(this.nextButton, this.emblaApi.canScrollNext());
+    });
+  }
+}
+
+export class AgendaCarousel extends Carousel {
   constructor(selector, options = {}, controllers = {}) {
     super(selector, options, controllers);
     this.expandedClass = 'agenda__slide__infos--expanded';
@@ -96,7 +110,7 @@ export class AgendaCarousel extends PrimaryCarousel {
   }
 }
 
-export class ActionsCarousel extends PrimaryCarousel {
+export class ActionsCarousel extends Carousel {
   constructor(selector, options = {}, controllers = {}) {
     super(selector, options, controllers);
     this.navItems = new Map();

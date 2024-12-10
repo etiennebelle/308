@@ -63,13 +63,13 @@
 
     &__control{
       height: 100%;
+      transition: all 0.25s ease-in-out;
+      opacity: 0;
+      will-change: opacity;
 
       &:not(.only\:md){
         display: flex;
       }
-
-      opacity: 0;
-      will-change: opacity;
 
       &.ctrl--prev{
         transform: translateX(rem(4px));

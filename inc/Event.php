@@ -3,7 +3,7 @@
   class Event
   {
     private const LANG_FR = 'fr';
-    private const LINK_CLASS = 'body body-alt body-md body-up body-link';
+    private const LINK_CLASS = 'body body-link'; /* body-alt body-md body-up */
 
     public int $id;
     public string $title;

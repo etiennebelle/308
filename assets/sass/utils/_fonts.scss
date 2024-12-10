@@ -80,8 +80,9 @@
   }
 
   &-link{
+    text-decoration: underline;
+
     &:hover{
-      text-decoration: underline;
       text-transform: uppercase;
       letter-spacing: rem(0.25px);
       font-family: "Mondwest-Bold", serif;
