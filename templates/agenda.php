@@ -61,29 +61,35 @@
 
           <div class="agenda__slide__header">
             <div class="agenda__slide__key">
-              <span class="body body-xl body-ul body-up only:lg"><?= ucfirst($event->keyword); ?></span>
-              <span class="body body-md body-ul body-up only:sm"><?= ucfirst($event->keyword); ?></span>
+              <span class="body body-xl body-ul body-up only:lg"><?= esc_html(ucfirst($event->keyword)); ?></span>
+              <span class="body body-md body-ul body-up only:sm"><?= esc_html(ucfirst($event->keyword)); ?></span>
             </div>
 
             <div class="agenda__slide__date">
-              <span class="body body-xl"><?= $event->dateDisplay; ?></span>
+              <span class="body body-xl"><?= esc_html($event->dateDisplay); ?></span>
             </div>
 
-            <h4 class="agenda__slide__title"><span class="body body-xl"><?= $event->title; ?></span></h4>
+            <h4 class="agenda__slide__title"><span class="body body-xl"><?= esc_html($event->title); ?></span></h4>
+
+            <?php if(!empty($event->cycle)): ?>
+              <div class="agenda__slide__cycle">
+                <span class="body body-md"><?= esc_html($event->cycle); ?></span>
+              </div>
+            <?php endif ?>
 
             <div class="agenda__slide__location">
               <?php foreach($event->location as $location_key): ?>
-                <p class="body body-md"><?= $location_key; ?></p>
+                <p class="body body-md"><?= esc_html($location_key); ?></p>
               <?php endforeach ?>
             </div>
           </div>
 
           <div class="agenda__slide__details" aria-hidden="true">
             <div class="agenda__slide__catchphrase">
-              <p class="body body-md"><?= nl2br($event->shortText); ?></p>
+              <p class="body body-md"><?= wp_kses_post(nl2br($event->shortText)); ?></p>
             </div>
             <div class="agenda__slide__richtext">
-              <p class="body body-md"><?= nl2br($event->richText); ?></p>
+              <p class="body body-md"><?= wp_kses_post(nl2br($event->richText)); ?></p>
             </div>
           </div>
         </div>

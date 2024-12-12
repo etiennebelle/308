@@ -1,36 +1,44 @@
 <?php
-  $partners_lists = [
-    'club' => get_field('club'),
-    'network' => get_field('network'),
-    'friends' => get_field('friends')
-  ];
+  $ordered_keys = ['club', 'partnership', 'network', 'friends'];
 ?>
 
 <div class="carousel">
   <div class="carousel__wrapper">
-    <?php
-      foreach($partners_lists as $key => $list){
-        render_list($key);
-      }
-    ?>
-
-    <?php if(have_rows('partnership')): ?>
-    <div class="carousel__slide col-span-1">
-      <div class="carousel__slide__container">
-        <?php while(have_rows('partnership')):
-          the_row();
-          $title = get_sub_field('partnership_title');
-          $mail_url = get_sub_field('partnership_mail');
-        ?>
-          <h4 class="carousel__cta">
-            <a class="btn btn-out btn-up" href="mailto:<?= esc_url($mail_url); ?>" >
-              <span class="body body-md body-up"><?= esc_html($title); ?></span>
-            </a>
-          </h4>
-        <?php endwhile ?>
-      </div>
-    </div>
-    <?php endif ?>
+    <?php foreach($ordered_keys as $key): ?>
+        <?php if($key != 'partnership'): ?>
+          <?php render_list($key); ?>
+        <?php else: ?>
+          <?php if(have_rows('partnership')): ?>
+            <div class="carousel__slide col-span-1">
+              <div class="carousel__slide__container">
+                <?php while(have_rows('partnership')):
+                  the_row();
+                  $title = get_sub_field('partnership_title');
+                  $richtext = get_sub_field('partnership_richtext');
+                  $cta = get_sub_field('partnership_cta');
+                  $mail_url = get_sub_field('partnership_mail');
+                  ?>
+                  <?php if(!empty($title)): ?>
+                    <h4 class="carousel__field">
+                      <span class="body body-md body-up"><?= esc_html($title); ?></span>
+                    </h4>
+                  <?php endif ?>
+                  <?php if(!empty($richtext)): ?>
+                    <div class="carousel__field">
+                      <p class="body body-md"><?= esc_html($richtext); ?></p>
+                    </div>
+                  <?php endif ?>
+                  <div class="carousel__cta">
+                    <a class="btn btn-out btn-up btn-mt" href="mailto:<?= esc_url($mail_url); ?>" >
+                      <span class="body body-md body-up"><?= esc_html($cta); ?></span>
+                    </a>
+                  </div>
+                <?php endwhile ?>
+              </div>
+            </div>
+          <?php endif ?>
+        <?php endif ?>
+      <?php endforeach ?>
   </div>
 </div>
 

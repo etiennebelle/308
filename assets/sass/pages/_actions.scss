@@ -81,6 +81,7 @@
 
   &__infos {
     display: flex;
+    flex-direction: column;
     position: relative;
     flex: 1;
     max-width: 33.33%;

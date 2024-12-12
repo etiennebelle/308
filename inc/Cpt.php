@@ -32,6 +32,7 @@
         'richtext' => parseRichText(get_field('action_richtext', $post->ID)),
         'background' => get_field('action_background', $post->ID),
         'color' => get_field('action_color', $post->ID),
+        'file' => get_field('action_file', $post->ID),
         'image' => get_field('action_image', $post->ID),
       ];
     }

@@ -46,6 +46,10 @@
             'action_image_credits' => $image_credits,
             'action_image_credits_display' => $image_credits_display,
         ],
+        'file' => [
+            'action_file_title' => $file_title,
+            'action_file_url' => $file_url,
+        ],
     ] = $action;
     global $rows_count;
   ?>
@@ -60,6 +64,13 @@
            <?= $richtext ?>
           </div>
         </div>
+        <?php if(!empty($file_url)): ?>
+        <div class="actions__slide__file">
+          <a href="<?= esc_url($file_url); ?>" target="_blank">
+            <span class="body body-md body-link"><?= esc_html($file_title); ?></span>
+          </a>
+        </div>
+        <?php endif ?>
       </div>
       <div class="actions__slide__media">
         <img class="actions__slide__image" src="<?= esc_url($image_url) ?>" alt="<?= esc_attr($title) ?>" loading="lazy">

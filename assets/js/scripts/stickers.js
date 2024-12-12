@@ -6,23 +6,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const stickers = document.querySelectorAll(".sticker");
 
+  function getRandomPosition(element) {
+    const containerWidth = window.innerWidth;
+    const containerHeight = window.innerHeight;
+
+    const elementWidth = element.offsetWidth;
+    const elementHeight = element.offsetHeight;
+
+    const maxX = Math.max(0, containerWidth - elementWidth);
+    const maxY = Math.max(0, containerHeight - elementHeight);
+
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+
+    return { x: randomX, y: randomY };
+  }
+
   stickers.forEach((sticker) => {
+    sticker.style.transform = 'none';
+
     const storedPosition = sessionStorage.getItem(sticker.id + "_position");
 
     if (storedPosition) {
       const { x, y } = JSON.parse(storedPosition);
-
       gsap.set(sticker, {
-        x: x,
-        y: y,
+        x,
+        y,
+        position: 'fixed',
+        top: 0,
+        left: 0
       });
     } else {
-      const randomX = Math.floor(Math.random() * window.innerWidth * 0.8);
-      const randomY = Math.floor(Math.random() * window.innerHeight * 0.8);
-
+      const { x, y } = getRandomPosition(sticker);
       gsap.set(sticker, {
-        x: randomX,
-        y: randomY,
+        x,
+        y,
+        position: 'fixed',
+        top: 0,
+        left: 0
       });
     }
 

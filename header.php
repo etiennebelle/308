@@ -39,31 +39,6 @@
         <h1 class="header__title headline headline-xl headline-lt headline-up"><?= esc_html($header_title); ?></h1>
       </div>
     <?php endfor ?>
-    <div class="header__col col-4-start col-end">
-      <button
-          class="header-btn"
-          aria-expanded="false"
-          aria-controls="header-menu"
-          type="button"
-      >
-        <span class="header-btn__icon">
-            <span class="icon--open">
-                <?php include 'components/svg/open.svg' ?>
-            </span>
-            <span class="icon--close">
-                <?php include 'components/svg/close.svg' ?>
-            </span>
-        </span>
-      </button>
-    </div>
-  </div>
-
-  <div id="header-menu" class="header__menu header__menu--<?= esc_attr($rows_count) ?> header__menu--full" aria-hidden="true">
-    <nav class="header__menu__nav">
-      <ul class="header__menu__nav__list">
-        <?php render_menu('header_links', $rows_count); ?>
-      </ul>
-    </nav>
   </div>
 </header>
 

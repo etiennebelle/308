@@ -17,14 +17,13 @@
         the_row();
 
         $icon_path = get_template_directory() . '/' . ($type === 'radio_player' ? 'components/svg/note.svg' : 'components/svg/heart-out.svg');
-        $background_color = $type === 'radio_player' ? $colors['radio']['background'] : $colors['rencontre']['background'];
 
         $stickers[$type] = [
           'display' => get_sub_field("sticker_{$type}_display"),
           'url' => get_sub_field("sticker_{$type}_url"),
           'type' => $type === 'radio_player' ? 'audio' : 'link',
           'icon' => file_exists($icon_path) ? $icon_path : null,
-          'background' => $background_color,
+          'background' => get_sub_field("sticker_{$type}_color"),
         ];
       }
     }

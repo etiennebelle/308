@@ -70,6 +70,26 @@
           <div class="carousel__field">
             <div class="body body-md"><?= wp_kses_post($about_richtext) ?></div>
           </div>
+          <?php if(have_rows('about_partners')):
+            $about_partners_label = get_field_object('about_partners')['label'];
+            ?>
+            <h4 class="carousel__title">
+              <span class="body body-md body-up"><?= esc_html($about_partners_label); ?></span>
+            </h4>
+            <ul class="carousel__list">
+              <?php while (have_rows('about_partners')):
+                the_row();
+                $about_partners_name = get_sub_field('about_partners_name');
+                $about_partners_url = get_sub_field('about_partners_url');
+                ?>
+                <li class="carousel__item">
+                  <a class="carousel__link" href="<?= esc_url($about_partners_url); ?>" target="_blank">
+                    <p class="body body-md body-link"><?= esc_html($about_partners_name); ?></p>
+                  </a>
+                </li>
+              <?php endwhile ?>
+            </ul>
+          <?php endif ?>
         </div>
       </div>
     <?php endif ?>
@@ -88,29 +108,9 @@
               $about_office_name = get_sub_field('about_office_name');
               $about_office_job = get_sub_field('about_office_job');
             ?>
-              <li class="carousel__item">
+              <li class="carousel__item carousel__item--mb">
                 <p class="body body-md"><?= esc_html($about_office_name); ?>,</p>
                 <p class="body body-md"><?= esc_html($about_office_job); ?></p>
-              </li>
-            <?php endwhile ?>
-          </ul>
-        <?php endif ?>
-        <?php if(have_rows('about_partners')):
-            $about_partners_label = get_field_object('about_partners')['label'];
-          ?>
-          <h4 class="carousel__title">
-            <span class="body body-md body-up"><?= esc_html($about_partners_label); ?></span>
-          </h4>
-          <ul class="carousel__list">
-            <?php while (have_rows('about_partners')):
-              the_row();
-              $about_partners_name = get_sub_field('about_partners_name');
-              $about_partners_url = get_sub_field('about_partners_url');
-            ?>
-              <li class="carousel__item">
-                <a class="carousel__link" href="<?= esc_url($about_partners_url); ?>" target="_blank">
-                  <p class="body body-md body-link"><?= esc_html($about_partners_name); ?></p>
-                </a>
               </li>
             <?php endwhile ?>
           </ul>

@@ -8,6 +8,7 @@
     public int $id;
     public string $title;
     public string $keyword;
+    public string $cycle;
     public array $links;
     public string $shortText;
     public string $richText;
@@ -35,6 +36,7 @@
       $this->id = $event['uid'];
       $this->title = ucwords($event['title'][self::LANG_FR]);
       $this->keyword = rtrim($event['keywords'][self::LANG_FR][0], 's');
+      $this->cycle = $event['cycle'] ?? '';
       $this->links = $event['links'];
       $this->shortText = $event['description'][self::LANG_FR];
       $this->richText = $this->formatRichText($event['longDescription'][self::LANG_FR], $this->links);
@@ -166,7 +168,7 @@
 
     private function setDateDisplay(string $startDate, string $startTime, string $endDate, int $durationDays, string $keyword): void
     {
-      if (in_array(strtolower($keyword), ['radio', 'conferences'])) {
+      if (in_array(strtolower($keyword), ['radio', 'conference'])) {
         $this->dateDisplay = "{$startDate} → {$startTime}";
       } elseif ($durationDays > 0) {
         $this->dateDisplay = "{$startDate} → {$endDate}";

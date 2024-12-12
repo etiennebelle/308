@@ -111,7 +111,7 @@
       position: absolute;
       width: 100%;
       top: 0;
-      height: rem(1px);
+      height: 1px;
       background: var(--color-light);
     }
   }
@@ -167,7 +167,7 @@
     position: absolute;
     width: 100%;
     bottom: 0;
-    height: rem(2px);
+    height: 2px;
     background: var(--color-black);
   }
 }

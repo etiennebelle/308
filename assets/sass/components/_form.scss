@@ -1,13 +1,14 @@
 @use '../utils/mixins' as *;
-
+@use '../utils/variables' as *;
 #form{
   box-sizing: border-box;
   width: 100%;
   display: inline-flex;
   border: rem(2px) solid var(--color-black);
+  margin-top: $ui-spacing;
 
   @include device(laptop-and-up){
-    width: 50%;
+    width: 90%;
   }
   
   label{
