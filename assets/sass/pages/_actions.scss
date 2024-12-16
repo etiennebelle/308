@@ -9,7 +9,7 @@
 
 .actions__nav{
   @include device(mobile){
-    grid-column: span 4;
+    display: none;
   }
 }
 

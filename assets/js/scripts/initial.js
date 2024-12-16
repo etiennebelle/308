@@ -1,5 +1,5 @@
 import Accordion from "./Accordion.js";
-import { PrimaryCarousel, AgendaCarousel, ActionsCarousel } from './Carousel.js';
+import { StandardCarousel, ExpandableCarousel, ActionsCarousel } from './Carousel.js';
 
 window.addEventListener('DOMContentLoaded', () => {
   /* Main Accordion */
@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
   main.init();
 
   /* Agenda */
-  const agendaCarousel = new AgendaCarousel(
+  const agendaCarousel = new ExpandableCarousel(
     '.agenda__carousel',
     { loop: true },
     {
@@ -29,13 +29,13 @@ window.addEventListener('DOMContentLoaded', () => {
   );
   actionsCarousel.init();
 
-  const primaryContainers = document.querySelectorAll('.carousel');
-  primaryContainers.forEach(container => {
+  const containers = document.querySelectorAll('.carousel');
+  containers.forEach(container => {
     const parent = container.closest('.section');
     const prevButton = `#${parent.id} .ctrl--prev`;
     const nextButton = `#${parent.id} .ctrl--next`;
 
-    new PrimaryCarousel(
+    new StandardCarousel(
       `#${parent.id} .carousel`,
       {
         loop: false,

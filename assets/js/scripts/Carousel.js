@@ -37,7 +37,7 @@ class Carousel {
   }
 }
 
-export class PrimaryCarousel extends Carousel{
+export class StandardCarousel extends Carousel{
   constructor(selector, options = {}, controllers = {}) {
     super(selector, options);
     this.controllers = controllers;
@@ -65,7 +65,7 @@ export class PrimaryCarousel extends Carousel{
   }
 }
 
-export class AgendaCarousel extends Carousel {
+export class ExpandableCarousel extends Carousel {
   constructor(selector, options = {}, controllers = {}) {
     super(selector, options, controllers);
     this.expandedClass = 'agenda__slide__infos--expanded';

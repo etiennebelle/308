@@ -46,7 +46,7 @@
       align-items: start;
       gap: $ui-spacing;
       overflow: auto;
-      
+
       &::-webkit-scrollbar{
         display: none;
       }
@@ -83,12 +83,10 @@
   &__form{
     width: 100%;
   }
-  
+
   &__form{
     display: flex;
     flex-direction: column;
     gap: $ui-spacing;
   }
 }
-
-
