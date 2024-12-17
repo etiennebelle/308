@@ -7,7 +7,7 @@
 * on mobile devices and tablets.
 */
 
-.carousel{
+.g-carousel{
   position: relative;
   flex: 1;
   overflow: hidden;
@@ -39,22 +39,23 @@
       flex: 0 0 50%;
     }
 
-    &__container{
-      padding: $ui-spacing;
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      gap: $ui-spacing;
-      overflow: auto;
+  }
 
-      &::-webkit-scrollbar{
-        display: none;
-      }
+  &__container{
+    padding: $ui-spacing;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: $ui-spacing;
+    overflow: auto;
 
-      @include device(tablet-and-up){
-        width: 90%;
-        padding: $ui-spacing 0;
-      }
+    &::-webkit-scrollbar{
+      display: none;
+    }
+
+    @include device(tablet-and-up){
+      width: 90%;
+      padding: $ui-spacing 0;
     }
   }
 

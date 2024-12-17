@@ -1,5 +1,5 @@
-<div class="carousel">
-  <div class="carousel__wrapper">
+<div class="g-carousel">
+  <div class="g-carousel__wrapper">
     <?php if(have_rows('membership')): ?>
       <?php while(have_rows('membership')):
         the_row();
@@ -13,15 +13,15 @@
           ? 'btn btn-mt btn-red btn-up'
           : 'btn btn-mt btn-out btn-up';
       ?>
-        <div class="carousel__slide col-span-2">
-          <div class="carousel__slide__container">
-            <h3 class="carousel__title">
+        <div class="g-carousel__slide col-span-2">
+          <div class="g-carousel__container">
+            <h3 class="g-carousel__title">
               <span class="body body-xl"><?= esc_html($membership_title); ?></span>
             </h3>
-            <div class="carousel__field">
+            <div class="g-carousel__field">
               <p class="body body-md"><?= wp_kses_post($membership_richtext); ?></p>
             </div>
-            <div class="carousel__cta">
+            <div class="g-carousel__cta">
               <a class="<?= esc_attr($cta_class); ?>" href="<?= esc_url($membership_cta_url); ?>" target="_blank">
                 <span class="body body-md"><?= esc_html($membership_cta_text); ?></span>
                 <?php
@@ -44,15 +44,15 @@
         $newsletter_richtext = get_sub_field('newsletter_richtext');
         $newsletter_placeholder = get_sub_field('newsletter_input_placeholder');
       ?>
-        <div class="carousel__slide col-span-1">
-          <div class="carousel__slide__container">
-            <h3 class="carousel__title">
+        <div class="g-carousel__slide col-span-1">
+          <div class="g-carousel__container">
+            <h3 class="g-carousel__title">
               <span class="body body-xl"><?= esc_html($newsletter_title); ?></span>
             </h3>
-            <div class="carousel__field">
+            <div class="g-carousel__field">
               <p class="body body-md"><?= wp_kses_post($newsletter_richtext); ?></p>
             </div>
-            <div class="carousel__form">
+            <div class="g-carousel__form">
               <form action="" method="post" id="form">
                 <label for="email"></label>
                 <input id="post_id" type="hidden" name="post_id" value="<?= esc_attr(get_the_ID()); ?>">
@@ -89,21 +89,21 @@
           }
         }
       ?>
-        <div class="carousel__slide col-span-1">
-          <div class="carousel__slide__container">
-            <h3 class="carousel__title">
+        <div class="g-carousel__slide col-span-1">
+          <div class="g-carousel__container">
+            <h3 class="g-carousel__title">
               <span class="body body-xl"><?= esc_html($links_title); ?></span>
             </h3>
             <?php if(!empty($links_richtext)): ?>
-              <div class="carousel__field">
+              <div class="g-carousel__field">
                 <p class="body body-md"><?= esc_html($links_richtext); ?></p>
               </div>
             <?php endif ?>
             <?php if(!empty($links)): ?>
-              <ul class="carousel__list">
+              <ul class="g-carousel__list">
                 <?php foreach($links as $link): ?>
-                  <li class="carousel__item">
-                    <a class="carousel__link" href="<?= esc_url($link['url']); ?>" target="_blank">
+                  <li class="g-carousel__item">
+                    <a class="g-carousel__link" href="<?= esc_url($link['url']); ?>" target="_blank">
                       <span class="body body-md body-link"><?= esc_html($link['title']); ?></span>
                     </a>
                   </li>

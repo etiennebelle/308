@@ -37,7 +37,7 @@ class Carousel {
   }
 }
 
-export class StandardCarousel extends Carousel{
+export class GridCarousel extends Carousel{
   constructor(selector, options = {}, controllers = {}) {
     super(selector, options);
     this.controllers = controllers;
@@ -68,7 +68,7 @@ export class StandardCarousel extends Carousel{
 export class ExpandableCarousel extends Carousel {
   constructor(selector, options = {}, controllers = {}) {
     super(selector, options, controllers);
-    this.expandedClass = 'agenda__slide__infos--expanded';
+    this.expandedClass = 'u-carousel__infos--expanded';
     this.expandButtons = new Set();
   }
 
@@ -80,12 +80,12 @@ export class ExpandableCarousel extends Carousel {
 
   initExpandButtons() {
     this.emblaApi.slideNodes().forEach(slide => {
-      const button = slide.querySelector('.mobile-expand');
+      const button = slide.querySelector('.btn-expand');
       if (!button) return;
 
       const handleClick = () => {
-        const wrapper = slide.querySelector('.agenda__slide__infos');
-        const details = wrapper?.querySelector('.agenda__slide__details');
+        const wrapper = slide.querySelector('.u-carousel__infos');
+        const details = wrapper?.querySelector('.u-carousel__details');
         this.toggleExpansion(wrapper, details, button);
       };
 

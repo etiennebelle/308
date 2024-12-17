@@ -1,5 +1,5 @@
 import Accordion from "./Accordion.js";
-import { StandardCarousel, ExpandableCarousel, ActionsCarousel } from './Carousel.js';
+import { GridCarousel, ExpandableCarousel, ActionsCarousel } from './Carousel.js';
 
 window.addEventListener('DOMContentLoaded', () => {
   /* Main Accordion */
@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   /* Agenda */
   const agendaCarousel = new ExpandableCarousel(
-    '.agenda__carousel',
+    '#agenda .u-carousel',
     { loop: true },
     {
       prev: '#agenda .ctrl--prev svg',
@@ -20,23 +20,33 @@ window.addEventListener('DOMContentLoaded', () => {
   );
   agendaCarousel.init();
 
-  const actionsCarousel = new ActionsCarousel(
-    '.actions__carousel',
+  const actionsCarouselMobile = new ExpandableCarousel(
+    '#actions .u-carousel',
+    { loop: true },
+    {
+      prev: '#actions .ctrl--prev svg',
+      next: '#actions .ctrl--next svg'
+    }
+  )
+  actionsCarouselMobile.init();
+
+  const actionsCarouselDesktop = new ActionsCarousel(
+    '#actions .a-carousel',
     { loop: true, axis: 'y' },
     {
-      navItems: '.actions__item'
+      navItems: '.a-item'
     }
-  );
-  actionsCarousel.init();
+  )
+  actionsCarouselDesktop.init();
 
-  const containers = document.querySelectorAll('.carousel');
+  const containers = document.querySelectorAll('.g-carousel');
   containers.forEach(container => {
     const parent = container.closest('.section');
     const prevButton = `#${parent.id} .ctrl--prev`;
     const nextButton = `#${parent.id} .ctrl--next`;
 
-    new StandardCarousel(
-      `#${parent.id} .carousel`,
+    new GridCarousel(
+      `#${parent.id} .g-carousel`,
       {
         loop: false,
         align: 'start'
