@@ -42,7 +42,7 @@
   function render_event($event): void
   {
     ?>
-    <div
+    <article
         class="u-carousel__slide"
         data-id="<?= esc_attr($event->id); ?>"
         data-key="<?= esc_attr($event->keyword); ?>"
@@ -68,7 +68,7 @@
               <span class="body body-xl"><?= esc_html($event->dateDisplay); ?></span>
             </div>
 
-            <h4 class="u-carousel__title"><span class="body body-xl"><?= esc_html($event->title); ?></span></h4>
+            <h3 class="u-carousel__title"><span class="body body-xl"><?= esc_html($event->title); ?></span></h3>
 
             <?php if(!empty($event->cycle)): ?>
               <div class="u-carousel__cycle">
@@ -100,7 +100,7 @@
           <span class="body body-sm"><?= $event->imageCredits ?></span>
         </div>
       </div>
-    </div>
+    </article>
     <?php
   }
 ?>

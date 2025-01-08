@@ -15,13 +15,15 @@
   </div>
 
   <div class="grid grid-cols-4">
-    <div class="a-nav col-span-1">
+    <nav class="a-nav col-span-1">
       <ul class="a-list">
         <?php foreach ($actions as $i => $action) : ?>
           <li
             class="a-item row row--<?= esc_attr($rows_count); ?>"
             data-key="<?= esc_attr(rtrim($action["name"], 's')); ?>"
             data-index="<?= esc_attr($i + 1); ?>"
+            role="tab"
+            aria-current="<?= $i === 0 ? 'true' : 'false' ?>"
             style="background: <?= esc_attr($action["background"]); ?>;"
           >
             <h3 class="headline headline-xl">
@@ -30,7 +32,7 @@
           </li>
         <?php endforeach; ?>
       </ul>
-    </div>
+    </nav>
 
     <div class="a-carousel col-span-3 only:lg">
       <div class="a-carousel__wrapper a-carousel__wrapper--<?= esc_attr($rows_count); ?>">
@@ -66,7 +68,7 @@
     $slide_class = $is_mobile ? "{$base_class}__slide" : "{$base_class}__slide {$base_class}__slide--" . esc_attr($rows_count);
     ?>
 
-    <div
+    <article
       class="<?= esc_attr($slide_class); ?>"
       data-key="<?= esc_attr(rtrim($action["name"], 's')); ?>"
       style="background: <?= esc_attr($background); ?>;"
@@ -127,7 +129,7 @@
           </div>
         <?php endif; ?>
       </div>
-    </div>
+    </article>
     <?php
   }
 ?>
