@@ -33,23 +33,23 @@
     */
     public function __construct(array $event, array $agendaColors)
     {
-      $this->id = $event['uid'];
-      $this->title = ucwords($event['title'][self::LANG_FR]);
-      $this->keyword = rtrim($event['keywords'][self::LANG_FR][0], 's');
+      $this->id = $event['uid'] ?? 0;
+      $this->title = ucwords($event['title'][self::LANG_FR]) ?? '';
+      $this->keyword = rtrim($event['keywords'][self::LANG_FR][0], 's') ?? '';
       $this->cycle = $event['cycle'] ?? '';
-      $this->links = $event['links'];
+      $this->links = $event['links'] ?? [];
       $this->shortText = $event['description'][self::LANG_FR];
-      $this->richText = $this->formatRichText($event['longDescription'][self::LANG_FR], $this->links);
+      $this->richText = $this->formatRichText($event['longDescription'][self::LANG_FR], $this->links) ?? '';
       $this->location = [
         'name' => $event['location']['name'] ?? '',
         'address' => $event['location']['address'] ?? '',
       ];
-      $this->imageUrl = $this->buildImageUrl($event['image']);
-      $this->imageCredits = $event['imageCredits'];
-      $this->startDate = $this->formatDate($event['firstTiming']['begin']);
-      $this->startTime = $this->formatTime($event['firstTiming']['begin']);
-      $this->endDate = $this->formatDate($event['lastTiming']['end']);
-      $this->durationDays = $this->calculateDuration($event['firstTiming']['begin'], $event['lastTiming']['end']);
+      $this->imageUrl = $this->buildImageUrl($event['image']) ?? '';
+      $this->imageCredits = $event['imageCredits'] ?? '';
+      $this->startDate = $this->formatDate($event['firstTiming']['begin']) ?? '';
+      $this->startTime = $this->formatTime($event['firstTiming']['begin']) ?? '';
+      $this->endDate = $this->formatDate($event['lastTiming']['end']) ?? '';
+      $this->durationDays = $this->calculateDuration($event['firstTiming']['begin'], $event['lastTiming']['end']) ?? 0;
       $this->setDateDisplay($this->startDate, $this->startTime, $this->endDate, $this->durationDays, $this->keyword);
       $this->setColors($agendaColors);
     }
