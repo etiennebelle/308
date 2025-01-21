@@ -20,10 +20,6 @@
     @include device(tablet-and-up){
       flex-direction: row;
     }
-
-    &[data-key = 'cycle'] *{
-      color: var(--color-light);
-    }
   }
 
   &__infos{

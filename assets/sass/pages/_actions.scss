@@ -12,10 +12,6 @@
   .a-item{
     cursor: pointer;
 
-    &[data-key = 'cycle'] *{
-      color: var(--color-light);
-    }
-
     &:not(.active):hover{
       h3{
         font-family: "Mondwest-Bold", serif;

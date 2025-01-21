@@ -36,10 +36,6 @@
     @include device(tablet){
       flex-direction: column;
     }
-
-    &[data-key = 'cycle'] *{
-      color: var(--color-light);
-    }
   }
 
   &__infos {

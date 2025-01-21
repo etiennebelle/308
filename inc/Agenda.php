@@ -30,7 +30,7 @@
      */
     public function getEvents(): ?array
     {
-      $url = "{$this->apiUrl}/{$this->agendaUid}/events?detailed=1&relative[]=upcoming&key={$this->apiKey}";
+      $url = "{$this->apiUrl}/{$this->agendaUid}/events?detailed=1&relative[]=current&relative[]=upcoming&key={$this->apiKey}";
       $res = wp_remote_get($url);
 
       if (is_wp_error($res)) {

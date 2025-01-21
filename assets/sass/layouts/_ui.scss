@@ -1,0 +1,6 @@
+* {
+  &[data-key = 'cycle'] *,
+  &[data-key = 'residence'] *{
+    color: var(--color-light);
+  }
+}
