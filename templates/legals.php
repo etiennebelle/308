@@ -54,10 +54,6 @@
 
         $legals_column_primary = [
           [
-            'title' => get_sub_field_object('legals_responsibility')['label'],
-            'content' => parseRichText(get_sub_field('legals_responsibility'))
-          ],
-          [
             'title' => get_sub_field_object('legals_gdpr')['label'],
             'content' => parseRichText(get_sub_field('legals_gdpr'))
           ]

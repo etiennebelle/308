@@ -103,14 +103,34 @@
             <span class="body body-md body-up"><?= esc_html($about_office_label); ?></span>
           </h4>
           <ul class="g-carousel__list">
-            <?php while (have_rows('about_office')):
+            <?php
+              while (have_rows('about_office')):
               the_row();
               $about_office_name = get_sub_field('about_office_name');
               $about_office_job = get_sub_field('about_office_job');
             ?>
-              <li class="g-carousel__item g-carousel__item--mb">
+              <li class="g-carousel__item <?= get_row_index() < count(get_field('about_office')) ? esc_attr('g-carousel__item--mb') : '' ?>">
                 <p class="body body-md"><?= esc_html($about_office_name); ?>,</p>
                 <p class="body body-md"><?= esc_html($about_office_job); ?></p>
+              </li>
+            <?php endwhile ?>
+          </ul>
+        <?php endif ?>
+        <?php if(have_rows('about_employees')):
+          $about_employees_label = get_field_object('about_employees')['label'];
+          ?>
+          <h4 class="g-carousel__title">
+            <span class="body body-md body-up"><?= esc_html($about_employees_label); ?></span>
+          </h4>
+          <ul class="g-carousel__list">
+            <?php while (have_rows('about_employees')):
+              the_row();
+              $about_employee_name = get_sub_field('about_employee_name');
+              $about_employee_job = get_sub_field('about_employee_job');
+              ?>
+              <li class="g-carousel__item <?= get_row_index() < count(get_field('about_employees')) ? esc_attr('g-carousel__item--mb') : '' ?>">
+                <p class="body body-md"><?= esc_html($about_employee_name); ?>,</p>
+                <p class="body body-md"><?= esc_html($about_employee_job); ?></p>
               </li>
             <?php endwhile ?>
           </ul>

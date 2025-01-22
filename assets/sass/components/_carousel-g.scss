@@ -49,6 +49,7 @@
     align-items: start;
     gap: $ui-spacing;
     overflow: auto;
+    line-height: 0;
 
     &::-webkit-scrollbar{
       display: none;

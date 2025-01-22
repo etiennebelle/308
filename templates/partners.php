@@ -51,6 +51,7 @@
           <?php while(have_rows($key)):
             the_row();
             $title = get_sub_field("{$key}_title");
+            $gap = get_sub_field("{$key}_gap") ?? 4;
           ?>
             <h4 class="g-carousel__title">
               <span class="body body-md body-up"><?= esc_html($title); ?></span>
@@ -62,7 +63,7 @@
                   $item_name = get_sub_field("{$key}_list_item_name");
                   $item_url = get_sub_field("{$key}_list_item_url");
                 ?>
-                  <li class="g-carousel__item">
+                  <li class="g-carousel__item <?= $key == 'network' && get_row_index() == $gap ? esc_attr('g-carousel__item--mb') : '' ?>">
                     <a class="g-carousel__link" href="<?= esc_url($item_url); ?>" target="_blank">
                       <p class="body body-md body-link"><?= esc_html($item_name); ?></p>
                     </a>
