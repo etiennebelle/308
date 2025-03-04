@@ -3,6 +3,7 @@ import EmblaCarousel from "embla-carousel";
 
 class Carousel {
   constructor(selector, options = {}, controllers = {}){
+    this.selector = selector
     this.emblaNode = document.querySelector(selector);
     this.options = {
       loop: false,
@@ -13,9 +14,23 @@ class Carousel {
   }
 
   init(){
+    if(!this.emblaNode) return
     this.emblaApi = EmblaCarousel(this.emblaNode, this.options);
+    if(this.emblaApi.slideNodes().length <= 1){
+      this.handleEmptyCarousel();
+    }
     this.setupNavButtons();
     return this.emblaApi;
+  }
+
+  handleEmptyCarousel(){
+    const wrapper = document.querySelector(this.selector);
+    const className = `${wrapper.className}--void`;
+    wrapper.classList.add(className);
+    const header = wrapper.closest('.section').querySelector('.section__heading');
+    header.querySelectorAll('.section__heading__control').forEach((el) => {
+      el.classList.add('hidden');
+    })
   }
 
   setupNavButtons(){
@@ -79,6 +94,7 @@ export class ExpandableCarousel extends Carousel {
   }
 
   initExpandButtons() {
+    if(!this.emblaApi) return
     this.emblaApi.slideNodes().forEach(slide => {
       const button = slide.querySelector('.btn-expand');
       if (!button) return;

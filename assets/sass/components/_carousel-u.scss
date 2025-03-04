@@ -158,6 +158,10 @@
     padding: rem(5px) 0;
     text-align: right;
 
+    @include device(pocket){
+      display: none;
+    }
+
     span{
       width: 100%;
       margin-inline: rem($ui-spacing);

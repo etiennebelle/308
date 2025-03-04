@@ -70,6 +70,10 @@
       &:not(.only\:md){
         display: flex;
       }
+      
+      &.hidden{
+        display: none;
+      }
 
       &.ctrl--prev{
         transform: translateX(rem(4px));
