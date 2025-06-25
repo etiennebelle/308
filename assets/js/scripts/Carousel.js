@@ -25,8 +25,6 @@ class Carousel {
 
   handleEmptyCarousel(){
     const wrapper = document.querySelector(this.selector);
-    const className = `${wrapper.className}--void`;
-    wrapper.classList.add(className);
     const header = wrapper.closest('.section').querySelector('.section__heading');
     header.querySelectorAll('.section__heading__control').forEach((el) => {
       el.classList.add('hidden');

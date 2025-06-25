@@ -21,7 +21,7 @@
     </div>
   </div>
 <?php else: ?>
-  <div class="u-carousel">
+  <div class="u-carousel u-carousel--void">
     <div class="u-carousel__wrapper">
       <div class="u-carousel__slide">
         <div class="u-carousel__infos">

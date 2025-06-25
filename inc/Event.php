@@ -35,7 +35,7 @@
     {
       $this->id = $event['uid'] ?? 0;
       $this->title = ucwords($event['title'][self::LANG_FR]) ?? '';
-      $this->keyword = rtrim($event['keywords'][self::LANG_FR][0], 's') ?? '';
+      $this->keyword = rtrim($event['keywords'][self::LANG_FR][0] ?? '', 's');
       $this->cycle = $event['cycle'] ?? '';
       $this->links = $event['links'] ?? [];
       $this->shortText = $event['description'][self::LANG_FR];
