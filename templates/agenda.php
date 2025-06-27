@@ -14,7 +14,7 @@
   <div class="u-carousel">
     <div class="u-carousel__wrapper">
       <?php foreach($events as $event) {
-        if (!empty($event->keyword) && isset($event->id)):
+        if (isset($event->id)):
           render_event($event);
         endif;
       } ?>
@@ -67,10 +67,13 @@
         </button>
         <div class="u-carousel__container">
           <div class="u-carousel__header">
+            <?php if(!empty($event->keyword)): ?>
             <div class="u-carousel__key">
               <span class="body body-xl body-ul body-up only:lg"><?= esc_html(ucfirst($event->keyword)); ?></span>
               <span class="body body-md body-ul body-up only:sm"><?= esc_html(ucfirst($event->keyword)); ?></span>
             </div>
+            <?php endif ?>
+
             <?php if(!empty($event->dateDisplay)): ?>
               <div class="u-carousel__date">
                 <span class="body body-xl"><?= esc_html($event->dateDisplay); ?></span>
